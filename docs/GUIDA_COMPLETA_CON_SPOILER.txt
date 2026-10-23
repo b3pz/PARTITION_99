@@ -15,12 +15,12 @@ Per ogni cartella apri almeno un file, premi «Verifica indice» e rispondi alla
 
 Q3 — GM-LAB / PROGRAMMI: Verifica indice segnala il registro sessioni mancante → Astro V › Proprietà (GMILANO_70, SESSIONI.LOG) › Cerca «GMILANO_70» › apri SESSIONI.LOG. Si ricompone da solo.
 Q4 — GM-LAB / SALVATAGGI: manca un profilo di gioco recente → apri Signal Maze (record GM_70 di oggi) e completa un livello. ALMA: «Non giochi come lui».
-Q5 — NV-RES-03 / INDICI: proprietario del volume → GMILANO-LAB (NVRES.SIG). Aprendo NEGATIVI.DAT si estrae 171098_NEG.BMP: in Disegno «Inverti colori» rivela la data 17 10 '98 e il biglietto.
-Q6 — NV-RES-03 / ALMA: priorità impostata nel 02/1999 → EXCLUSIVE (DIRECTIVE.CFG).
+Q5 — NV-RES-03 / INDICI: il modem si collega da solo, Matteo segnala un post di GMILANO_70 sul forum. Dal profilo GMILANO_70 › thread «Volume di test che non si monta» (1998) si impara il comando; etichetta da NVRES.SIG. START › Esegui: MOUNT NV-RES-03 /OWNER:GMILANO-LAB.
+Q6 — NV-RES-03 / ALMA: sfondo con la stanza, orologio fermo alle 21:30, ALMA si disegna in Disegno (versione 0.8). Pagina di Giuseppe › scheda A.L.M.A. 0.8 › Scarica ALMA08.CFG › NovaRescue › DIRECTIVE.CFG › Confronta con… › clic sulla riga priority.
 Q7 — NV-RES-03 / MEMORIA: ultima sessione → 30/11/1999 (CRONO.DAT).
 Q8 — NV-RES-03 / CONTROLLO: a chi era legata ALMA nel 1997 → nessuno / none (ORIGINE.BAK).
 
-ALMA (alma.js) — fasi legate solo ai progressi: accoglienza dopo MONTANINO, dubbio dopo Q3, sospetto dopo Q4 (finestra GM-LAB «Perché?», NON_CANCELLARE.txt, messaggio fantasma a Matteo), paura dopo Q6 (sfondo, Astro, promemoria.txt, disturbi nei giochi), attesa dopo Q7 (finestra sulla promessa del 30/11). Frasi nelle schermate di Signal Maze e Pixel Runner cambiano con la fase. Le risposte alle finestre GM-LAB e l'aver detto «Sono Giuseppe» cambiano il monologo finale.
+ALMA (alma.js) — fasi legate solo ai progressi: accoglienza dopo MONTANINO, dubbio dopo Q3, sospetto dopo Q4 (finestra GM-LAB «Perché?», NON_CANCELLARE.txt, modem automatico e post di GMILANO_70 sul forum segnalato da Matteo), paura dopo Q6 (sfondo, Astro, promemoria.txt, disturbi nei giochi), attesa dopo Q7 (finestra sulla promessa del 30/11). Frasi nelle schermate di Signal Maze e Pixel Runner cambiano con la fase. Le risposte alle finestre GM-LAB e l'aver detto «Sono Giuseppe» cambiano il monologo finale.
 Matteo scrive per primo appena sei in linea dopo aver recuperato l'account con NovaRescue.
 
 FINALI: dopo Q8 si apre il terminale di A.L.M.A. 1.9 (stessa grafica del prototipo nella foto del fotogramma 14). Il monologo cambia in base a come hai trattato ALMA. Ogni operazione è spiegata in parole semplici e chiede conferma:
@@ -40,4 +40,4 @@ SALVATAGGI: il browser usa localStorage; usare sempre lo stesso browser e percor
 NOTA: i quattro giochi (Signal Maze, Pixel Runner, Spaccamattoni, Difesa Orbitale) sono liberi e non richiedono punteggi per avanzare. I 56 reperti restano nei documenti di progetto (docs/), non più nel menu del PC.
 
 SOLUZIONI · CATALOGAZIONE NOVARESCUE
-Q3 Astro › Cerca GMILANO_70 › SESSIONI.LOG · Q4 Signal Maze, un livello · Q5 GMILANO-LAB · Q6 EXCLUSIVE · Q7 30/11/1999 · Q8 none
+Q3 Astro › Cerca GMILANO_70 › SESSIONI.LOG · Q4 Signal Maze, un livello · Q5 MOUNT NV-RES-03 /OWNER:GMILANO-LAB · Q6 confronto DIRECTIVE.CFG/ALMA08.CFG, riga priority · Q7 30/11/1999 · Q8 none

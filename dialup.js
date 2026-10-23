@@ -36,6 +36,9 @@ function dialer(){
 }
 const prevOpen=openApp;openApp=function(app){if(app==='dialup'){if(booting)return;dialer();document.getElementById('start-menu').hidden=true;return}return prevOpen(app)};
 
+// Capitolo 5: il modem si collega da solo, senza che nessuno prema Connetti (atto2.js).
+window.P99Dial={async auto(){if(window.novaOnline)return;window.novaSound?.('dialtone');await sleep(900);for(const d of NUMBER){window.novaSound?.('dtmf'+d);await sleep(110)}await sleep(400);window.novaSound?.('ring');await sleep(2200);window.novaSound?.('handshake');await sleep(4200);setOnline(true);window.novaSound?.('ding')}};
+
 // NavigaNova senza connessione: pagina d'errore con il pulsante per connettersi.
 const baseBrowser=launchBrowser;
 launchBrowser=function(){baseBrowser();const w=[...document.querySelectorAll('.window')].pop();const view=w?.querySelector('.web-page');if(!view)return;
