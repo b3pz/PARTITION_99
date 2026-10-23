@@ -1,0 +1,23 @@
+PARTITION_99 — REPORT VERIFICA BETA 1.0
+
+FUNZIONI DISPONIBILI
+- Boot e desktop NOVA 2000; Astro V, NavigaNova, Goolarno, Chat 99, Disegno, giochi.
+- Q1 e Q2 come nella beta precedente; archivio E01-E56.
+- Q3-Q8 con 12 combinazioni alternative di prove incrociate (due per profondità) e sei domande di verifica.
+- Sei nuclei narrativi e scelta tra FORMAT, ARCHIVE e RELEASE, con opzione Y2K.
+- Guida aggiornata con tutte le soluzioni.
+
+CONTROLLI ESEGUITI
+- Sintassi JS dei tre file esterni: superata.
+- Presenza di tutti i 56 ID reperti: verificata.
+- Esistenza degli ID richiesti dalle 12 vie documentali: verificata.
+- Integrità ZIP: superata.
+
+NON CERTIFICATO
+- Collaudo end-to-end nel browser: NON ESEGUITO. Chromium ha bloccato sia file:// sia localhost in questo ambiente.
+- I 56 reperti sono schede narrative consultabili: non sono ancora 56 foto/documenti completi e autonomi.
+- Signal Maze è rinominato e contestualizzato, ma usa ancora una meccanica arcade provvisoria.
+- Non esiste al momento prova automatizzata di tutte le combinazioni di click e dei salvataggi reali.
+
+CONCLUSIONE
+Questa è una beta funzionale con percorso fino ai tre finali, NON una beta validata al 100%. La verifica effettiva dovrà essere completata in browser.
