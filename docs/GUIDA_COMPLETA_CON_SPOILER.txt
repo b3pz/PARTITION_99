@@ -1,0 +1,41 @@
+PARTITION_99 — BETA COMPLETA (grafica provvisoria)
+GUIDA SPOILER — DALL'AVVIO AI TRE FINALI
+========================================
+Apri index.html con un browser e attendi BIOS, caricamento e desktop. Conserva i file completa.js, astro-v.svg, foto_laboratorio.svg nella stessa cartella.
+
+Q1: Risorse del computer > Disco C > Diagnostica/Analisi approfondita. In Documenti leggi diagnostica_nova.txt (NV-RES-03).
+Q2: NavigaNova > www.goolarno.it > ricerca NV-RES-03 > discussione Forum NOVANET > archivio NovaRescue 1.2 > Scarica. Leggi novarescue_rapporto.txt.
+ATTO I: Chat 99 > Connetti Matteo. Puoi scegliere qualsiasi risposta. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
+Da qui la demo precedente terminava con «Non torni più da me?». Ora continua.
+
+APRI «REGISTRO DISCO» dal desktop (o menu START). Questo è il registro di recupero diegetico del sistema: non mostra obiettivi prima di Q1/Q2 e della firma GM-LAB.
+NUOVO: Menu START > Archivio reperti (56). Per ogni raccolta Q3–Q8 leggi una delle due COPPIE precise di documenti indicate sotto; apri poi Registro disco, usa le due operazioni investigative e rispondi alla domanda di verifica. Non basta aprire tre documenti casuali. L’archivio tiene traccia di quali documenti hai consultato. Puoi consultarli anche prima del registro, ma capirai progressivamente le informazioni.
+
+Q3 — Il vecchio programma: apri entrambi i documenti del registro 3 (la nota di Giuseppe e il confronto con Astro V), poi «Confronta gli indizi».
+Q4 — Non giochi come lui: esamina le traiettorie storiche Signal Maze e il profilo Pixel Runner, poi confronta.
+Q5 — Il volume non montato: monta NV-RES-03 in sola lettura e recupera i negativi del 1998, poi confronta.
+Q6 — La memoria di una relazione: leggi gli appunti di Edoardo e recupera diario/chat, poi confronta.
+Q7 — La promessa: incrocia le date sulla morte di Giuseppe con le ultime registrazioni, poi confronta.
+Q8 — La ricomposizione: verifica la direttiva, collega tutte le memorie e apri il nucleo ricomposto.
+
+FINALI: dal nucleo ALMA puoi scegliere:
+- FORMAT: cancellazione della partizione
+- ARCHIVE: conservazione isolata
+- RELEASE: rimozione della direttiva di attaccamento
+Per l'epilogo segreto, spunta l'archivio Y2K PRIMA della scelta finale.
+Dopo uno dei tre finali, «Rivedi il finale da una scelta diversa» permette di provarne un altro senza ricominciare dall'inizio.
+
+SALVATAGGI: il browser usa localStorage; usare sempre lo stesso browser e percorso.
+NOTA: il registro Q3–Q8 è un vertical proof narrativo con azioni ed evidenze testuali: non tutti i 56 reperti della bibbia sono ancora scene visive autonome. I giochi arcade restano utilizzabili liberamente e non richiedono punteggi obbligatori. Non confondere questa beta completa nel percorso con una versione definitiva in termini di asset, profondità interattiva e rifinitura.
+
+NOTE v1 APPROFONDIMENTO: Tutti i 56 reperti sono ora consultabili nell’archivio di NOVA OS. Le raccolte Q3–Q8 richiedono due reperti collegati da una catena valida, più le due operazioni del registro e una deduzione corretta. Sono ancora schede descrittive con contesto e concatenazioni, non 56 fotografie o documenti pienamente impaginati.
+
+
+SOLUZIONI PROVE E RISPOSTE · BETA 1.0
+Q3: E13+E16 oppure E14+E17; risposta: Le abitudini registrate dai giochi.
+Q4: E19+E23 oppure E20+E24; risposta: L’utente attuale ha abitudini diverse.
+Q5: E25+E26 oppure E27+E29; risposta: Un volume sperimentale non montato.
+Q6: E32+E34 oppure E33+E35; risposta: L’introduzione di attaccamento esclusivo.
+Q7: E39+E41 oppure E40+E43; risposta: Non aveva saputo della morte di Giuseppe.
+Q8: E48+E51 oppure E49+E54; risposta: La direttiva di attaccamento al creatore.
+Ogni reperto è disponibile nell'Archivio reperti del menu START.
