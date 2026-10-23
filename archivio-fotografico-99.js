@@ -33,6 +33,8 @@ const P=[
 ['persone','MATTEO_9811.JPG','Matteo Niccheri','30/11/1999','Amico personale di Giuseppe. 11 maggio: compleanno.','',false],
 ['persone','EDOARDO_9710.JPG','Edoardo Cattani','28/10/1997','Collaboratore tecnico. 28 ottobre: compleanno.','',false],
 ['persone','GIUSEPPE_9905.JPG','Giuseppe Milano','31/05/1999','Programmatore GM-LAB. 31 maggio: compleanno.','',false],
+['stampa','SAMMEZZANO_231299.HTM','Sammezzano cambia proprietà','23/12/1999','Articolo basato su passaggio di proprietà verificato','www.valdarnoggi.it/storia/sammezzano',true],
+['stampa','SERRISTORI_231299.HTM','Sei secoli dello Spedale Serristori','23/12/1999','Articolo celebrativo della fondazione del 1399','www.valdarnoggi.it/storia/serristori',true],
 ['stampa','RESCO_231299.HTM','Resco Reggello e il calcio biancoazzurro','23/12/1999','Facsimile giornale locale — ricostruzione','www.valdarnoggi.it/amarcord/resco',true],
 ['stampa','CASCIA_221299.HTM','Cascia, recita per il nuovo millennio','22/12/1999','Facsimile di evento immaginario in stile 1999','www.valdarnoggi.it/amarcord/cascia',true],
 ['stampa','CALCIO_231299.HTM','Montevarchi e Sangiovannese','23/12/1999','Articolo di costume sportivo, ricostruzione','www.valdarnoggi.it/amarcord/calcio',true],
