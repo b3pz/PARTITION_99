@@ -20,6 +20,10 @@ if(arts[page]&&pressPhotos[photo]){
 const illustration='<figure style="margin:8px 0;border:1px solid #84765d;padding:5px;background:#eee7d2"><img src="'+pressPhotos[photo]+'" alt="Fotografia rievocativa, non originale storico" style="width:100%;max-height:330px;object-fit:contain"><figcaption style="font:11px Arial">Ricostruzione fotografica per l’archivio del gioco, non fotografia originale del 1999.</figcaption></figure>';
 arts[page]=arts[page].replace('<div class="cols">',illustration+'<div class="cols">');
 }}
+const press=window.P99_PRESS_PHOTOS||{};
+for(const [page,key] of [['www.valdarnoggi.it/amarcord/resco','resco'],['www.valdarnoggi.it/amarcord/cascia','cascia']]){
+ if(press[key]&&arts[page])arts[page]=arts[page].replace('<div class="cols">','<figure style="max-width:580px;margin:12px auto;background:#e8dfcb;padding:8px;border:1px solid #8a8170"><img src="'+press[key]+'" alt="Ricostruzione fotografica della cronaca locale" style="width:100%;max-height:330px;object-fit:cover"><figcaption style="font:12px Georgia;text-align:center">Immagine ricostruita per PARTITION_99, non fotografia originale del 1999</figcaption></figure><div class="cols">')
+}
 Object.assign(SITES,arts);
 const add='<p><a href="http://www.valdarnoggi.it/storia/sammezzano">🏰 Sammezzano: il nuovo corso</a></p><p><a href="http://www.valdarnoggi.it/storia/serristori">🏥 Il Serristori compie sei secoli</a></p><p><a href="http://www.valdarnoggi.it/amarcord/resco">⚽ Resco Reggello: il calcio biancoazzurro</a></p><p><a href="http://www.valdarnoggi.it/amarcord/cascia">🎭 Cascia: la recita del nuovo millennio</a></p>';
 for(const [k,html] of Object.entries(SITES)){if(k==='www.novanet.it'&&!html.includes('Cascia: la recita'))SITES[k]=html.replace('<b>Ultime notizie:</b>','<b>Ultime notizie:</b>'+add);if(k==='www.valdarnoggi.it'&&!html.includes('Cascia: la recita'))SITES[k]=html+add}
