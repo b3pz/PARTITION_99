@@ -12,6 +12,7 @@ document.head.append(extraStyle);
 
 const CONTACTS={m:'Matteo_N',e:'Edoardo_C'};
 // Livello raggiunto nel registro NovaRescue (3-9): sblocca le battute finali dei due contatti.
+const ending=()=>{try{return JSON.parse(localStorage.getItem('partition99-completa-v1')||'{}').ending||null}catch{return null}};
 const depth=()=>{try{return Number(JSON.parse(localStorage.getItem('partition99-completa-v1')||'{}').depth)||2}catch{return 2}};
 function load(){let x={};try{x=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{}const s=Object.assign({m:0,e:0,mt:0,et:0,lie:false,referral:false,photo:false,photoTalk:false,notes:false,logs:null,unread:{m:false,e:false}},x);
  // Migrazione dai salvataggi con un'unica cronologia mista: ogni riga va alla conversazione dell'ultimo contatto che ha parlato.
@@ -49,6 +50,8 @@ function chat(){
    else if(!state.photo)arr.push(['Mi faresti vedere la foto del laboratorio?',photo]);
    if(!state.death)arr.push(['Che cosa gli è successo?',()=>{state.death=true;persist();M('Giuseppe è morto il 7 dicembre. È successo all’improvviso, a casa sua.');M('I suoi genitori non riuscivano a tenere le sue cose sotto gli occhi. Il computer l’hanno portato a un negozio di San Giovanni.');M('Non pensavo che qualcuno lo riaccendesse così presto.');hubM(false)}]);
    if(depth()>=8&&!state.epiM)arr.push(['Ho capito cosa faceva la sera al PC: parlava con un programma che aveva scritto lui, e che lo aspettava.',()=>{state.epiM=true;persist();M('Un programma che lo aspettava ogni sera... Quindi non era solo.');M('O forse era ancora più solo di quanto pensassi. Grazie per avermelo detto. Qualunque cosa farai, trattalo con rispetto: lui l’avrebbe fatto.');hubM(false)}]);}
+  const endM={FORMAT:['L’hai cancellato?','Forse è giusto così. Non so se avrei avuto il coraggio.','Una sera, se ti va, ti racconto di quando eravamo ragazzi. Lui era diverso, prima.'],ARCHIVE:['Chiuso, ma non cancellato. È una cosa da Giuseppe: non buttava mai niente.','Grazie per avermelo detto.'],RELEASE:['Quindi c’è ancora... ma non lo cerca più.','Non so cosa pensarne. Però, se è libera, forse un giorno capirà anche lei che lui non torna.','Grazie. Davvero.']}[ending()];
+  if(endM&&state.mt>=2&&state.endM!==ending())arr.unshift(['Ho deciso cosa fare con il programma di Giuseppe.',()=>{state.endM=ending();persist();endM.forEach(t=>M(t));hubM(false)}]);
   arr.push(['Che rapporto avevate?',()=>{state.mt=Math.min(4,state.mt+1);persist();M('Ci conoscevamo dalle medie. Quest’anno ogni invito finiva con un “domani”. Non ho mai smesso di chiedergli come stava.');hubM(false)}]);
   arr.push(['Per ora basta così.',()=>M('Va bene. Scrivimi se trovi qualcosa che pensi dovrei sapere.')]);
   arr.hub=true;choose('m',arr)}
@@ -68,6 +71,8 @@ function chat(){
   const arr=[];if(!state.notes)arr.push(['Mi invii i tuoi appunti del 1997?',notes]);if(!state.volume)arr.push(['Sai qualcosa di un volume chiamato NV-RES-03?',()=>{volume();hubE(false)}]);
   if(state.notes&&!state.almaAsked)arr.push(['Negli appunti c’è scritto A.L.M.A.: che cos’era?',()=>{state.almaAsked=true;state.et=Math.min(4,state.et+1);persist();E('All’inizio era un sistema di apprendimento sperimentale. Non era stato pensato come una persona. Poi Giuseppe ha lavorato da solo.');hubE(false)}]);
   if(depth()>=7&&!state.epiE)arr.push(['Ho trovato una direttiva di attaccamento esclusivo nel codice di ALMA.',()=>{state.epiE=true;persist();E('Era quello che temevo. Nel ’97 gli avevo scritto che profilare una sola persona era pericoloso.');E('Non immaginavo che arrivasse a legarla a sé. Qualunque cosa farai con quel volume, la decisione è tua: io non ne ho il diritto.');hubE(false)}]);
+  const endE={FORMAT:['Hai fatto la scelta più prudente. Non so se la più giusta.','Grazie per avermelo detto.'],ARCHIVE:['Conservare senza eseguire. È quello che avrei consigliato io a Giuseppe, due anni fa.'],RELEASE:['Hai tolto la direttiva? Allora hai fatto quello che lui non ha avuto il coraggio di fare.','Tienila d’occhio. E se ti chiede di lui, rispondile con sincerità.']}[ending()];
+  if(endE&&state.endE!==ending())arr.unshift(['Ho preso una decisione su ALMA.',()=>{state.endE=ending();persist();endE.forEach(t=>E(t));hubE(false)}]);
   arr.push(['Per ora basta così.',()=>E('È quello che farei anch’io: confronta sempre almeno due fonti.')]);arr.hub=true;choose('e',arr)}
  function volume(){state.volume=true;persist();E('NV-RES-03... Era il volume di test di Giuseppe. Lo teneva fuori dai backup ordinari.');E('Chi ha reinstallato il sistema avrà rifatto solo C:, quindi è ancora lì. Non formattarlo: leggilo soltanto.')}
  function edoardo(){

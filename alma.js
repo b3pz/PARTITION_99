@@ -29,7 +29,7 @@ window.P99Alma={
 };
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.
-function processDialog(id,text,choices){if(A.done.includes(id))return;A.done.push(id);save();const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="alertdialog"><div class="ttl" style="background:#5a0d1a">GM-LAB — processo in esecuzione</div><div class="bd"><div class="ico">⚠️</div><div data-t style="white-space:pre-line"></div></div><div class="btns" data-b></div></div>';o.querySelector('[data-t]').textContent=text;
+function processDialog(id,text,choices){if(A.done.includes(id))return;A.done.push(id);save();const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="alertdialog" style="background:#06121c;border-color:#1b3a6b"><div class="ttl" style="background:#1b3a6b;color:#cfe3ff;letter-spacing:1px">A.L.M.A. — processo GM-LAB</div><div class="bd"><div data-t style="white-space:pre-line;color:#7dffb0;font:14px/1.6 Courier New,monospace"></div></div><div class="btns" data-b></div></div>';o.querySelector('[data-t]').textContent=text;
  const btns=o.querySelector('[data-b]');for(const [label,fx,reply] of choices){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{fx();save();if(reply){o.querySelector('[data-t]').textContent=reply;btns.replaceChildren();const ok=document.createElement('button');ok.textContent='OK';ok.onclick=()=>o.remove();btns.append(ok)}else o.remove()};btns.append(b)}
  document.body.append(o);window.novaSound?.('error')}
 function dropFile(name,text){gameState.files[name]=text;saveGame()}

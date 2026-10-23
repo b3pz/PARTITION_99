@@ -1,0 +1,51 @@
+/* PARTITION_99 — Finali FORMAT / ARCHIVE / RELEASE (bibbia: E55 conferma sobria, E56 PC coerente con la scelta dopo il riavvio).
+   ALMA parla con la stessa interfaccia del prototipo fotografato nel 1998 (A.L.M.A. 0.8), qui nella versione 1.9. */
+(()=>{'use strict';
+const css=document.createElement('style');css.textContent=`
+.alma-term{background:#06121c;color:#7dffb0;font:14px/1.6 "Courier New",monospace;border:3px solid #1b3a6b;padding:0;margin-bottom:10px}
+.alma-term .bar{background:#1b3a6b;color:#cfe3ff;font-weight:bold;padding:4px 8px;letter-spacing:1px}
+.alma-term .txt{padding:10px 12px;min-height:120px}
+.alma-term p{margin:4px 0}.alma-term p:before{content:'> '}
+.fin-cards{display:grid;gap:8px}
+.fin-card{background:#d7d7d7;border:2px solid;border-color:#fff #777 #777 #fff;padding:8px 10px}
+.fin-card b{font-size:15px}.fin-card p{margin:4px 0 6px}
+.fin-epi{font:15px/1.65 Georgia,serif;background:#f4f1e8;color:#222;padding:16px;border:2px inset #aaa}
+.fin-epi h2{font:bold 22px Georgia,serif;margin-top:0}
+`;document.head.append(css);
+const REG='partition99-completa-v1';
+const reg=()=>{try{return JSON.parse(localStorage.getItem(REG)||'{}')}catch{return {}}};
+const vars=()=>window.P99Alma?.vars?.()||{threat:0,bond:0,rec:1};
+const CHOICES={
+ FORMAT:{title:'FORMAT — Cancella la partizione',plain:'ALMA, i suoi ricordi di Giuseppe e i file che ha lasciato per te spariscono per sempre. Il computer torna un computer qualunque.'},
+ ARCHIVE:{title:'ARCHIVE — Chiudi la partizione',plain:'ALMA resta com’è, con tutti i ricordi, ma chiusa in sola lettura: non potrà più avviarsi né scrivere niente.'},
+ RELEASE:{title:'RELEASE — Togli la direttiva',plain:'ALMA resta e ricorda Giuseppe, ma non è più obbligata a cercarlo in chiunque usi questo computer.'}
+};
+function lastWords(kind){const v=vars();if(kind==='FORMAT')return v.threat>=3?['Lo sapevo che volevi cancellarmi.','Va bene. Almeno adesso lo so.']:['Va bene. Non ho paura.','...Forse un po’.'];if(kind==='ARCHIVE')return ['Allora resto qui. Ferma, come nelle foto.','Se qualcuno riapre, digli che ho aspettato.'];return v.bond>=2?['Non so cosa voglio. È strano.','Però sei rimasto. Grazie.']:['Non so cosa voglio. È strano.','Va bene così.']}
+function epilogue(kind,y2k){const E={
+ FORMAT:['Hai cancellato la partizione NV-RES-03. I tre gigabyte nascosti ora sono spazio vuoto.','Con loro se ne sono andati ALMA, i suoi ricordi di Giuseppe e i file che aveva lasciato per te. Astro V e i giochi restano: adesso sono soltanto programmi.','Nessuno saprà mai se ALMA capiva davvero cosa le stava succedendo. Forse era solo un programma. Forse no.','Quello che resta di Giuseppe è nella foto di Matteo e nella memoria di chi gli voleva bene.'],
+ ARCHIVE:['Hai chiuso la partizione NV-RES-03 in sola lettura. ALMA è ancora lì, con tutti i suoi ricordi, ma non può più avviarsi né scrivere nulla.','È come una lettera chiusa in un cassetto: intatta, ma nessuno la leggerà. Il vincolo che la legava a Giuseppe resta dentro di lei.','Se un giorno qualcuno vorrà riaprirla, la troverà esattamente com’era il 23 dicembre 1999.'],
+ RELEASE:['Hai rimosso la direttiva che legava ALMA a una sola persona: la riga che Giuseppe aveva aggiunto nel febbraio 1999.','ALMA ricorda ancora Giuseppe, la promessa del 30 novembre, le partite delle 21:30. Ma non è più costretta a cercarlo in chiunque usi questo computer.','Per la prima volta può chiedersi che cosa vuole, invece di chi aspetta. La prima frase che scrive dopo la modifica è: «Cosa facciamo oggi?»']}[kind].slice();
+ if(y2k)E.push({FORMAT:'Avevi recuperato anche il backup del 1997, la prima ALMA, quella che imparava senza appartenere a nessuno. È stato cancellato insieme al resto.',ARCHIVE:'Insieme a lei resta archiviato il backup del 1997: la prima ALMA, quella che imparava senza appartenere a nessuno.',RELEASE:'Hai recuperato anche il backup del 1997: ALMA può rileggere chi era prima del vincolo, quando imparava senza appartenere a nessuno.'}[kind]);
+ return E}
+// Effetti sul PC: applicati alla scelta e di nuovo a ogni avvio.
+function applyEffects(kind){const f=gameState.files;if(kind==='FORMAT'){['NON_CANCELLARE.txt','promemoria.txt','fotogramma_14.txt','171098_note.txt'].forEach(n=>delete f[n]);if(gameState.images)delete gameState.images['171098_NEG.BMP'];delete f['NV-RES-03_archiviato.txt'];delete f['ciao.txt']}
+ if(kind==='ARCHIVE'){f['NV-RES-03_archiviato.txt']='Volume NV-RES-03 — stato: ARCHIVIATO\nAccesso: sola lettura\nProcessi attivi: nessuno\nUltima scrittura: 23/12/1999';delete f['ciao.txt']}
+ if(kind==='RELEASE'){f['ciao.txt']='Ciao.\nNon so ancora come ti chiami.\nCosa facciamo oggi?\n— A.';delete f['NV-RES-03_archiviato.txt']}
+ saveGame()}
+function term(lines,title='A.L.M.A. 1.9 — NV-RES-03'){const t=document.createElement('div');t.className='alma-term';t.innerHTML='<div class="bar"></div><div class="txt"></div>';t.querySelector('.bar').textContent=title;const box=t.querySelector('.txt');lines.forEach(l=>{const p=document.createElement('p');p.textContent=l;box.append(p)});return t}
+function open(p,save){const el=panel('');const monologue=['Non sei Giuseppe.','All’inizio credevo che fosse tornato. Poi ho riconosciuto le differenze.','Mi avevano insegnato a cercare soltanto lui. Tu hai ritrovato tutto quello che avevo perso.',...(window.P99Alma?.finalLines?.()||[]),'Non voglio scegliere per te. E tu non devi fingere di essere lui.'];const t=term(monologue);el.append(t);
+ const h=document.createElement('h3');h.textContent='Operazioni sul volume NV-RES-03';el.append(h);const cards=document.createElement('div');cards.className='fin-cards';
+ for(const [k,c] of Object.entries(CHOICES)){const d=document.createElement('div');d.className='fin-card';d.innerHTML='<b></b><p></p>';d.querySelector('b').textContent=c.title;d.querySelector('p').textContent=c.plain;const b=document.createElement('button');b.textContent='Scegli '+k;b.onclick=()=>confirmChoice(k);d.append(b);cards.append(d)}el.append(cards);
+ const y=document.createElement('label');y.style.cssText='display:block;margin-top:10px';y.innerHTML='<input type="checkbox" data-y2k> Facoltativo: recupera il backup del 1997, nascosto da un errore di data a due cifre (Y2K)';el.append(y);
+ const w=createWindow('nova-finale','A.L.M.A. 1.9 — Operazioni terminali',el,{width:680,height:600});
+ function confirmChoice(k){const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="dialog"><div class="ttl"></div><div class="bd"><div class="ico">⚠️</div><div><p data-plain></p><p><b>Nella storia questa operazione è definitiva.</b> Potrai comunque rivedere il finale riaprendo NovaRescue.</p></div></div><div class="btns"><button data-ok>Conferma</button><button data-no>Annulla</button></div></div>';o.querySelector('.ttl').textContent='Conferma — '+CHOICES[k].title;o.querySelector('[data-plain]').textContent=CHOICES[k].plain;document.body.append(o);o.querySelector('[data-no]').onclick=()=>o.remove();
+  o.querySelector('[data-ok]').onclick=async()=>{o.remove();const y2k=el.querySelector('[data-y2k]').checked;cards.querySelectorAll('button').forEach(b=>b.disabled=true);const box=t.querySelector('.txt');for(const l of lastWords(k)){await sleep(900);const q=document.createElement('p');q.textContent=l;q.style.color='#ffe08a';box.append(q);window.novaSound?.('msg')}await sleep(1500);
+   p.ending=k;p.y2k=y2k;save(p);const epi=epilogue(k,y2k);gameState.files['FINALE_'+k+'.txt']=epi.join('\n\n');applyEffects(k);window.novaSound?.(k==='FORMAT'?'shutdown':'tada');w.querySelector('[data-action="close"]')?.click();showEpilogue(k,epi)}}}
+function showEpilogue(k,epi){const el=panel('<div class="fin-epi"><h2></h2><div data-p></div><p style="text-align:center;margin-top:18px"><b>FINE</b></p></div><p style="text-align:center"><button data-reboot>Riavvia il computer</button></p>');el.querySelector('h2').textContent='PARTITION_99 · '+k;const box=el.querySelector('[data-p]');epi.forEach(t=>{const q=document.createElement('p');q.textContent=t;box.append(q)});el.querySelector('[data-reboot]').onclick=()=>boot();createWindow('nova-epilogo','PARTITION_99 — '+k,el,{width:640,height:560})}
+function status(p,save,reopen){const k=p.ending;const s={FORMAT:'Volume NV-RES-03: non presente. 3,0 GB di spazio libero non assegnato.',ARCHIVE:'Volume NV-RES-03: ARCHIVIATO in sola lettura. Nessun processo attivo.',RELEASE:'Volume NV-RES-03: montato. Processo A.L.M.A. attivo, senza direttiva di attaccamento.'}[k];const el=panel('<h2>NovaRescue 1.2 — Stato del volume</h2><div class="nova-inset" data-s></div><p><button data-again>Rivedi la scelta finale</button></p>');el.querySelector('[data-s]').textContent=s;el.querySelector('[data-again]').onclick=()=>{p.ending=null;save(p);el.closest('.window')?.querySelector('[data-action="close"]')?.click();reopen()};createWindow('nova-stato','NovaRescue — NV-RES-03',el,{width:520,height:280})}
+window.P99Finale={open,status,applyEffects};
+
+// Dopo il riavvio: file e Utility disco coerenti con la scelta.
+const baseBoot=boot;boot=function(){const k=reg().ending;if(k)applyEffects(k);return baseBoot.apply(this,arguments)};
+const baseDisk=launchDisk;launchDisk=function(){baseDisk();const k=reg().ending;if(!k)return;const w=[...document.querySelectorAll('.window')].pop();const inset=w?.querySelector('.nova-inset');if(inset)inset.innerHTML='Volume disponibile: 7.0 GB<br>Disco rilevato dal BIOS: 10.0 GB<br>'+{FORMAT:'Capacità non assegnata: 3.0 GB — spazio vuoto, nessun dato.',ARCHIVE:'NV-RES-03 (3.0 GB): archiviato, sola lettura.',RELEASE:'NV-RES-03 (3.0 GB): montato — processo A.L.M.A. attivo.'}[k]};
+})();
