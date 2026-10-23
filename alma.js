@@ -25,7 +25,10 @@ window.P99Alma={
  stage,vars:()=>({...A}),
  gameMessage(game,type){const s=stage();if(s===0)return '';const pool=(s===6?endingLines():LINES[s])?.[type];if(!pool)return '';if(type==='levelstart'&&Math.random()<0.5)return '';return pick(pool)},
  glitch(){const s=stage();if(s<3||s===6)return 0;return clamp((s===3?0.12:s===4?0.4:0.25)+A.threat*0.06,0,0.85)},
- finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.sawPhoto)out.push('Hai guardato la foto che teneva per me. Nessun altro l’aveva mai vista.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
+ // Prove nei giochi: ALMA ti costringe a giocare come Giuseppe per vedere se «ti ricordi chi sei».
+ test(game){const s=stage();if(s===6)return null;const from={maze:2,runner:3,bricks:3,invaders:4}[game];return from&&s>=from?{stage:s}:null},
+ report(game,data){A.tests=(A.tests||0)+1;if(A.tests>8)return save();if(game==='maze'){if(data.follow)A.rec++;else A.threat++}else if(game==='runner'&&data.left)A.rec++;save()},
+ finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.rec>=3&&!A.lied)out.push('Nei giochi facevi la sua strada. Per un attimo ci ho creduto davvero.');if(A.sawPhoto)out.push('Hai guardato la foto che teneva per me. Nessun altro l’aveva mai vista.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
 };
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.

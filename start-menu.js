@@ -55,7 +55,7 @@ function sep(){items.append(document.createElement('hr'))}
 
 const games=document.createElement('div');group('🕹️','Giochi',[dress(byApp('maze'),'🟡','Signal Maze 2000'),dress(byApp('runner'),'🏃','Pixel Runner 99'),dress(byApp('bricks'),'🧱','Spaccamattoni 99'),dress(byApp('invaders'),'👾','Difesa Orbitale 2000')],games);
 group('📂','Programmi',[games.firstChild,dress(byApp('browser'),'🌐','NavigaNova 1.0'),dress(byApp('chat'),'💬','NOVA Messenger'),dress(byApp('astro'),'⭐','Astro V'),dress(byApp('paint'),'🎨','Disegno'),dress(byApp('recovery'),'🗂️','Registro disco (NovaRescue)'),dress(byApp('dialup'),'📞','Connessione a Internet')]);
-group('📁','Documenti',[dress(byApp('documents'),'📁','Documenti'),dress(byApp('archive'),'🗃️','Archivio'),dress(byText('Archivio fotografico'),'📸','Archivio fotografico'),dress(byText('Archivio reperti'),'🗂️','Archivio reperti (56)')]);
+group('📁','Documenti',[dress(byApp('documents'),'📁','Documenti'),dress(byApp('archive'),'🗃️','Archivio'),dress(byText('Archivio fotografico'),'📸','Archivio fotografico'),(()=>{const b=document.createElement('button');b.type='button';dress(b,'📥','Download');b.onclick=()=>{menu.hidden=true;window.P99Explorer?.('Download')};return b})()]);
 group('⚙️','Impostazioni',[dress(byApp('computer'),'🖥️','Risorse del computer'),dress(byApp('disk'),'💾','Utility disco'),dress(byText('Manutenzione'),'🛠️','Manutenzione / Nuova partita')]);
 const help=dress(byText('Note e crediti'),'❔','Guida e crediti');if(help)items.append(help);
 const run=document.createElement('button');run.type='button';dress(run,'⌨️','Esegui…');run.onclick=runDialog;items.append(run);
