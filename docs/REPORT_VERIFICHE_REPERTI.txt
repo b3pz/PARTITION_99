@@ -1,0 +1,19 @@
+PARTITION_99 — REPORT IMPLEMENTAZIONE REPERTI v1
+
+FUNZIONI AGGIUNTE
+- Archivio reperti NOVA: E01–E56 consultabili con descrizione, collocazione e nesso investigativo.
+- Filtro per raccolta Q1–Q8, vista documento, marcatura persistente dei reperti letti.
+- Progressione Q3–Q8: due operazioni d’indagine già esistenti + almeno tre reperti consultati nella raccolta corrente.
+- Accesso all’archivio dal menu START e dai registri avanzati.
+- Reset della partita cancella anche la lettura dei reperti.
+
+CONTROLLI REALI
+- Numero reperti da CSV: 56.
+- Sintassi JavaScript dei tre script: superata con node --check.
+- Browser automatico: tentativo fallito perché l’ambiente impedisce file://; NON collaudato il percorso integrale via click.
+
+LIMITI
+- I reperti sono resi consultabili come schede descrittive: gli articoli integrali, gli allegati realistici e le fotografie non sono ancora implementati per ciascun ID.
+- I vincoli sulla lettura dei reperti sono aggiuntivi, ma non garantiscono ancora una deduzione investigativa reale: la narrazione Q3-Q8 mantiene interazioni semplificate.
+- Nessuna certificazione dei tre finali in un browser reale.
+- Il salvataggio locale non è migrato tra browser o origini differenti.
