@@ -2,11 +2,15 @@
 (()=>{
 'use strict';
 const KEY='partition99-dialoghi-v3';
+const messStyle=document.createElement('style');
+messStyle.textContent='.mess99{height:100%;min-height:0;display:flex;flex-direction:column;font:12px Arial,sans-serif;color:#152a4a;background:#e4ebf7}.mess99-head{padding:10px;display:flex;align-items:center;gap:10px;color:white;background:linear-gradient(90deg,#153d7f,#6fa0e1);border-bottom:1px solid #274c82}.mess99-emblem{border-radius:50%;background:white;color:#245aa2;font: bold 28px Georgia;padding:0 10px}.mess99-head small,.mess99-sidebar small{display:block;font-size:10px;margin-top:3px}.mess99-live{margin-left:auto;color:#e4ffdb;font-size:11px}.mess99-main{display:grid;grid-template-columns:168px minmax(0,1fr);flex:1;min-height:0}.mess99-sidebar{background:#fff;border:2px inset #aaa;padding:5px;overflow:auto}.mess99-me{background:#e5f0fe;padding:9px 5px;margin-bottom:6px}.mess99-me small{color:#21743b}.mess99-group{background:#c9dcf8;color:#163d76;font-weight:bold;padding:6px;margin:5px 0}.mess99-sidebar button{display:block;width:100%;text-align:left;border:0;background:white;color:#1a3659;padding:9px 4px;cursor:pointer}.mess99-sidebar button:hover{background:#deebfb}.mess99-sidebar button small{padding-left:22px;color:#61718d}.mess99-chat{display:flex;flex-direction:column;min-height:0}.mess99-chatheader{background:#d2e2f8;border-bottom:1px solid #a2b6d5;padding:8px}.mess99-log{background:#fff;border:2px inset #ddd;margin:6px;flex:1;min-height:110px;overflow-y:auto;padding:8px}.mess99-log .chat-line{margin:3px 0;padding:5px;border-bottom:1px dotted #d5dfeb}.mess99-compose{background:#e8f0fb;padding:6px;border-top:1px solid #b8c9dd;max-height:45%;overflow-y:auto}.mess99-compose-label{font-weight:bold;padding-bottom:4px}.mess99-options{display:flex;flex-wrap:wrap;gap:5px}.mess99-options button{font:12px Arial;background:#f8fbff;border:2px outset #fff;color:#19385d;padding:7px;cursor:pointer}.mess99-foot{padding:6px;background:#d0ddeb;border-top:1px solid #8799b3;color:#3a4b5d;font-size:11px}@media(max-width:590px){.mess99-main{grid-template-columns:118px minmax(0,1fr)}.mess99-sidebar button{padding:5px 2px}.mess99-chatheader{padding:5px}.mess99-head{padding:5px}}';
+document.head.append(messStyle);
+
 function load(){let x={};try{x=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{}return Object.assign({m:0,e:0,mt:0,et:0,lie:false,referral:false,photo:false,notes:false,history:[]},x)}
 let state=load();
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}}
 function chat(){
- const el=panel('<h2>💬 Chat 99 — Connessione NOVA</h2><div class="nova-inset"><b>Account locale:</b> NOVA_USER · <b>Profilo storico:</b> '+(gameState.q2?'GMILANO_70':'non rilevato')+'</div><p><button data-m>Matteo_N</button> <button data-e>Edoardo_C</button> <button data-h>Rileggi conversazioni</button></p><div class="nova-inset" data-log style="min-height:270px;max-height:310px;overflow-y:auto;line-height:1.45"></div><div data-opts style="display:flex;flex-wrap:wrap;gap:6px;padding-top:8px"></div><p class="note">Le persone possono interrompere la conversazione, chiedere spiegazioni o rifiutare allegati. La fiducia si costruisce con ciò che scegli di dire.</p>');
+ const el=panel('<div class="mess99"><header class="mess99-head"><div class="mess99-emblem">N</div><div><strong>NOVA Messenger 1.0</strong><small>Messaggi istantanei · 1999</small></div><span class="mess99-live">● In linea</span></header><div class="mess99-main"><aside class="mess99-sidebar"><div class="mess99-me">👤 <b>NOVA_USER</b><small>● Disponibile</small></div><div class="mess99-group">Contatti</div><button data-m><span>🟢 Matteo_N</span><small>Online</small></button><button data-e><span>🟡 Edoardo_C</span><small>Occupato</small></button><div class="mess99-group">Strumenti</div><button data-h>📁 Cronologia</button></aside><section class="mess99-chat"><div class="mess99-chatheader">✉ Conversazione · NOVANET</div><div data-log class="mess99-log"></div><div class="mess99-compose"><div class="mess99-compose-label">Messaggi disponibili</div><div data-opts class="mess99-options"></div></div></section></div><footer class="mess99-foot">Connessione 56K simulata · Ultimo accesso registrato su questo computer</footer></div>');
  const log=el.querySelector('[data-log]'),opts=el.querySelector('[data-opts]');
  function entry(w,t,store=true){const p=document.createElement('p');p.className='chat-line';const b=document.createElement('b');b.textContent=w+': ';p.append(b,document.createTextNode(t));log.append(p);log.scrollTop=log.scrollHeight;if(store){state.history.push([w,t]);state.history=state.history.slice(-140);persist()}}
  function say(w,t){entry(w,t)}
@@ -43,7 +47,7 @@ function chat(){
  }
  el.querySelector('[data-m]').onclick=matteo;el.querySelector('[data-e]').onclick=edoardo;el.querySelector('[data-h]').onclick=resume;
  resume();
- createWindow('chat','Chat 99 — Conversazioni',el,{width:710,height:595});
+ createWindow('chat','NOVA Messenger 1.0 — Messaggi',el,{width:785,height:580});
  }
  // Sostituiamo solo la UI dei dialoghi: manteniamo invariati i flag di avanzamento del gioco.
  launchStoryChat=chat;
