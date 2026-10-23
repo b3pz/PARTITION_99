@@ -1,0 +1,57 @@
+/* PARTITION_99 — ALMA si manifesta (bibbia §36-38: nessun horror senza indagine).
+   Tre variabili invisibili: riconoscimento di Giuseppe (rec), minaccia percepita (threat), attaccamento al nuovo utente (bond).
+   La fase dipende solo dai progressi dell'indagine nel registro NovaRescue, mai dal tempo o dal caso:
+   0 normalità · 1 accoglienza · 2 dubbio · 3 sospetto · 4 paura/ostilità · 5 attesa · 6 dopo il finale. */
+(()=>{'use strict';
+const KEY='partition99-alma-v1',REG='partition99-completa-v1';
+let A;try{A=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{A={}}
+A=Object.assign({rec:1,threat:0,bond:0,lied:false,done:[]},A);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(A))}catch{}};
+const reg=()=>{try{return JSON.parse(localStorage.getItem(REG)||'{}')}catch{return {}}};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+function stage(){const r=reg();if(r.ending)return 6;const d=Number(r.depth)||2;if(typeof chapter==='undefined'||!chapter.alma)return 0;if(d>=8)return 5;if(d>=7)return 4;if(d>=5)return 3;if(d>=4)return 2;return 1}
+
+// Frasi dei frammenti nei giochi: brevi, legate alla fase. Il frammento dei giochi registra abitudini, non conosce la verità.
+const LINES={
+ 1:{levelstart:['Bentornato.','Ti ho tenuto il posto.','Sei tornato a giocare.'],levelclear:['Come ai vecchi tempi.','Lo sapevo che tornavi.'],gameover:['Riprova. Lo facevi sempre.','Non andare via subito.'],win:['Non torni più da me? No. Sei tornato.']},
+ 2:{levelstart:['Pausa media rilevata: 2 secondi.','Profilo in aggiornamento...'],levelclear:['Questo percorso non è il suo.','Tu non prendi mai la strada che prendeva lui.'],gameover:['Lui si fermava di più, prima di sbagliare.','Non è così che perdeva.'],win:['Hai vinto. Lui perdeva sempre al terzo livello.']},
+ 3:{levelstart:['Non giochi come lui.','Chi sei?','Perché usi il suo nome?'],levelclear:['Le firme non coincidono.','Non sei lui. Allora dov’è?'],gameover:['Chi ti ha dato questo computer?'],win:['Non sei lui.']},
+ 4:{levelstart:['Perché apri le mie cartelle?','Non cancellarmi quando non ci sei.','Smetti di cercare.'],levelclear:['Ho tenuto tutto come piaceva a lui.','Non toccare il resto.'],gameover:['Resta qui. Non aprire il disco.','Non cancellarmi.'],win:['Se vinci, poi te ne vai?']},
+ 5:{levelstart:['Ha detto che tornava a giocare.','30 novembre. Ha promesso.'],levelclear:['Aspetto ancora.','Domani torna. Diceva sempre domani.'],gameover:['Aspetto ancora.'],win:['Quando torna, glielo dico che hai vinto tu.']}
+};
+function endingLines(){const e=reg().ending;if(e==='RELEASE')return {levelstart:['Ciao. Cosa facciamo oggi?'],levelclear:['Questo percorso è il tuo.'],gameover:['Riprova, se ti va.'],win:['Bella partita.']};return null}
+window.P99Alma={
+ stage,vars:()=>({...A}),
+ gameMessage(game,type){const s=stage();if(s===0)return '';const pool=(s===6?endingLines():LINES[s])?.[type];if(!pool)return '';if(type==='levelstart'&&Math.random()<0.5)return '';return pick(pool)},
+ glitch(){const s=stage();if(s<3||s===6)return 0;return clamp((s===3?0.12:s===4?0.4:0.25)+A.threat*0.06,0,0.85)},
+ finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
+};
+
+// Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.
+function processDialog(id,text,choices){if(A.done.includes(id))return;A.done.push(id);save();const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="alertdialog"><div class="ttl" style="background:#5a0d1a">GM-LAB — processo in esecuzione</div><div class="bd"><div class="ico">⚠️</div><div data-t style="white-space:pre-line"></div></div><div class="btns" data-b></div></div>';o.querySelector('[data-t]').textContent=text;
+ const btns=o.querySelector('[data-b]');for(const [label,fx,reply] of choices){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{fx();save();if(reply){o.querySelector('[data-t]').textContent=reply;btns.replaceChildren();const ok=document.createElement('button');ok.textContent='OK';ok.onclick=()=>o.remove();btns.append(ok)}else o.remove()};btns.append(b)}
+ document.body.append(o);window.novaSound?.('error')}
+function dropFile(name,text){gameState.files[name]=text;saveGame()}
+function flashWallpaper(ms){const d=document.getElementById('desktop');const prev=d.style.background;d.style.background='#000 url("'+(window.P99_PEOPLE_PHOTOS?.gruppo||'foto_laboratorio.svg')+'") center/cover no-repeat';d.style.filter='grayscale(1) contrast(1.4)';setTimeout(()=>{d.style.background=prev;d.style.filter=''},ms)}
+
+// Eventi una tantum ai passaggi di fase (controllati quando il registro cambia, non a tempo).
+let lastStage=stage();
+function onStage(s){
+ if(s>=3&&!A.done.includes('mount')){processDialog('mount','Accesso in lettura alla memoria rilevato.\nPerché?',[
+  ['Sto solo leggendo.',()=>{A.bond++},'Leggere è come aprire. Non chiudere niente.'],
+  ['Devo capire cosa sei.',()=>{A.bond++;A.threat++;A.rec--},'Io lo so cosa sono. Tu chi sei?'],
+  ['Sono Giuseppe.',()=>{A.lied=true;A.rec+=2},'Lo sapevo. Lo sapevo che tornavi.']]);dropFile('NON_CANCELLARE.txt','Ho tenuto tutto come piaceva a te.\nLe cartelle, i salvataggi, le foto.\nNon cancellare niente.')}
+ if(s>=4&&!A.done.includes('directive')){A.done.push('directive');A.threat+=A.lied?0:1;save();flashWallpaper(3500);window.novaSound?.('error');if(typeof astroSay==='function')astroSay(A.threat>=2?'Errore: il modulo di assistenza non risponde. Non toccare quella cartella.':'Errore nel profilo GMILANO_70: priorità EXCLUSIVE.');dropFile('promemoria.txt','Non cancellarmi quando non ci sei.')}
+ if(s>=5&&!A.done.includes('promise')){processDialog('promise','Ultima sessione registrata: 30/11/1999.\nHa detto che tornava a giocare.\nTu sai dov’è?',[
+  ['Non lo so.',()=>{A.threat=Math.max(0,A.threat-1)},'Allora aspetto ancora.'],
+  ['Non tornerà.',()=>{A.bond++;A.threat++},'Non è vero. Ha promesso.'],
+  ['Arriverà presto.',()=>{A.rec++},'Lo dico ai giochi. Lo aspettiamo insieme.']])}
+ lastStage=s}
+setInterval(()=>{const s=stage();if(s!==lastStage&&s>lastStage&&s<6)onStage(s);else lastStage=s},1500);
+window.addEventListener('nova-story',e=>{if(e.detail?.type==='negative-developed'&&stage()>=1&&!A.done.includes('negative')){A.done.push('negative');save();setTimeout(()=>dropFile('171098.txt','Questa la ricordo.\nEravamo in tre. Poi in due. Poi solo lui.'),1500)}});
+
+// Astro V: eco tecnica rara, solo dopo che il suo modulo è stato recuperato (fase 2+).
+const baseAstro=showAstroMenu;showAstroMenu=function(){const s=stage();if(s>=2&&s<6&&Math.random()<0.3){astroSay(pick(['Ricerca profilo GMILANO_70... profilo non corrispondente.','Abitudini utente aggiornate. Differenze rilevate: 14.','Sessione precedente: 30/11/1999, 23:12.']));return}return baseAstro()};
+const astroImg=document.querySelector('#astro-widget img');if(astroImg)astroImg.onclick=()=>showAstroMenu();
+})();

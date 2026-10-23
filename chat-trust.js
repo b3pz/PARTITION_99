@@ -39,6 +39,8 @@ function chat(){
  function photo(){if(state.mt<3){M('Non me la sento ancora. È l’ultimo ricordo che ho di noi tre insieme. Prima vorrei sapere cosa ne farai.');choose('m',[['Resterà tra noi. Mi serve solo per capire dov’è nato il suo lavoro.',()=>{state.mt=Math.min(4,state.mt+1);persist();photo()}],['Lascia stare, non importa.',()=>{M('Come vuoi. Se ci ripensi, chiedimela.');hubM(false)}]]);return}
  state.photo=true;chapter.receipt=true;saveChapter();persist();M('Te la mando. Non farla girare: per me non è una prova, è un ricordo.');sys('m','Allegato foto_laboratorio_1998.jpg ricevuto. Ora è in Archivio.','Server');hubM(false)}
  function hubM(greet=true){
+  if((window.P99Alma?.stage?.()||0)>=3&&(window.P99Alma.stage()<6)&&!state.ghost&&state.mt>=0){state.ghost=true;persist();M('Aspetta, prima devo chiederti una cosa.');M('Poco fa mi è arrivato un messaggio dal tuo account. C’era scritto solo: «Non torni più da me?»');M('Sei stato tu?');
+   choose('m',[['No. Credo che sia un programma di Giuseppe.',()=>{state.mt=Math.min(4,state.mt+1);persist();M('Un programma... Giuseppe parlava di un’assistente a cui stava insegnando a ricordare. Pensavo scherzasse.');M('Se è così, non so se voglio sapere cos’altro ricorda.');hubM(false)}],['Sì, scusa. Era uno scherzo.',()=>{state.mt=Math.max(-2,state.mt-2);persist();M('Non è divertente. Per niente.');hubM(false)}]]);return}
   if(greet)M(state.mt<2?'Non ho dimenticato come mi hai parlato. Se vuoi continuare, dimmi perché queste informazioni sono importanti.':'Sono qui. Alcune cose le so, altre non voglio inventarle.');
   const arr=[];
   if(state.mt<2)arr.push(['Mi dispiace per il tono. Rispetterò quello che decidi.',()=>{state.mt+=2;persist();M('Apprezzo che tu lo dica. Non è facile parlare di lui.');hubM(false)}]);
@@ -81,6 +83,8 @@ function chat(){
  net();line('Sistema',window.novaOnline===false?'Non connesso. Usa «Connessione a Internet» per collegarti a NOVANET.':'Scegli un contatto per aprire la conversazione.');
  createWindow('chat','NOVA Messenger 1.0 — Messaggi',el,{width:785,height:580});shown=true;
  }
+ // Matteo vede riapparire l'account e scrive per primo: avviso in stile messenger in basso a destra.
+ setInterval(()=>{if(!window.novaOnline||!gameState.q2||state.m!==0||state.pinged)return;state.pinged=true;state.unread.m=true;persist();window.novaSound?.('msg');const t=document.createElement('div');t.style.cssText='position:fixed;right:12px;bottom:48px;z-index:9000;width:250px;background:#e4ebf7;color:#152a4a;border:2px outset #fff;box-shadow:2px 3px #1116;font:12px Arial;cursor:pointer';t.innerHTML='<div style="background:linear-gradient(90deg,#153d7f,#6fa0e1);color:#fff;padding:5px 8px;font-weight:bold">NOVA Messenger</div><div style="padding:10px"><b>Matteo_N</b> è in linea e ti ha inviato un messaggio.</div>';t.onclick=()=>{t.remove();openApp('chat')};document.body.append(t);setTimeout(()=>t.remove(),9000)},2500);
  // Sostituiamo solo la UI dei dialoghi: manteniamo invariati i flag di avanzamento del gioco.
  launchStoryChat=chat;
 })();

@@ -11,14 +11,17 @@ ATTO I: NOVA Messenger > Matteo_N (ogni contatto ha la sua conversazione). Rispo
 Da qui la demo precedente terminava con «Non torni più da me?». Ora continua.
 
 REGISTRO DISCO = NOVARESCUE 1.2. Dopo la firma MONTANINO apri «Registro disco» dal menu START (o la prima voce «Registro recupero GM-LAB» nell’Archivio). Si apre NovaRescue con le cartelle recuperate, sbloccate una alla volta.
-Per ogni cartella apri almeno una COPPIA di file (i primi due oppure gli ultimi due), poi premi «Verifica indice» e scrivi una breve conclusione. «Sintesi automatica» mostra una frase che viene sempre accettata.
+Per ogni cartella apri almeno un file, premi «Verifica indice» e rispondi alla domanda di catalogazione con un dato preciso letto nei file. «Sintesi automatica» dà prima un'indicazione generica, poi il file e la voce da guardare.
 
-Q3 — GM-LAB / PROGRAMMI (ASTRO_V.BAK + ASTRO.INI oppure GM_97.LOG + HELP.TXT): le abitudini registrate dai giochi.
-Q4 — GM-LAB / SALVATAGGI (SIGNAL.SAV + RUNNER.DAT oppure PROFILE.IDX + RUNNER.CFG): il profilo del nuovo utente è diverso.
-Q5 — NV-RES-03 / INDICI (VOL.MAP + NVRES.SIG oppure EDOARDO.LOG + NEGATIVI.DAT): un volume / una partizione sperimentale non montata.
-Q6 — NV-RES-03 / ALMA (REVISIONI.TXT + DIRECTIVE.CFG oppure ALMA_97.BAK + CHAT99.LOG): attaccamento esclusivo.
-Q7 — NV-RES-03 / MEMORIA (MATTEO.MSG + CRONO.DAT oppure POSTA.MSG + DIARIO.TXT): ALMA non sapeva della morte di Giuseppe.
-Q8 — NV-RES-03 / CONTROLLO (LEGAME.CFG + ORIGINE.BAK oppure CONTROL.LOG + ALMA.IDX): la direttiva di attaccamento.
+Q3 — GM-LAB / PROGRAMMI: fonte di apprendimento → game_logs / i giochi (ASTRO.INI).
+Q4 — GM-LAB / SALVATAGGI: profilo che non corrisponde → NOVA_USER (PROFILE.IDX).
+Q5 — NV-RES-03 / INDICI: proprietario del volume → GMILANO-LAB (NVRES.SIG). Aprendo NEGATIVI.DAT si estrae 171098_NEG.BMP: in Disegno «Inverti colori» rivela la data 17 10 '98 e il biglietto.
+Q6 — NV-RES-03 / ALMA: priorità impostata nel 02/1999 → EXCLUSIVE (DIRECTIVE.CFG).
+Q7 — NV-RES-03 / MEMORIA: ultima sessione → 30/11/1999 (CRONO.DAT).
+Q8 — NV-RES-03 / CONTROLLO: a chi era legata ALMA nel 1997 → nessuno / none (ORIGINE.BAK).
+
+ALMA (alma.js) — fasi legate solo ai progressi: accoglienza dopo MONTANINO, dubbio dopo Q3, sospetto dopo Q4 (finestra GM-LAB «Perché?», NON_CANCELLARE.txt, messaggio fantasma a Matteo), paura dopo Q6 (sfondo, Astro, promemoria.txt, disturbi nei giochi), attesa dopo Q7 (finestra sulla promessa del 30/11). Frasi nelle schermate di Signal Maze e Pixel Runner cambiano con la fase. Le risposte alle finestre GM-LAB e l'aver detto «Sono Giuseppe» cambiano il monologo finale.
+Matteo scrive per primo appena sei in linea dopo aver recuperato l'account con NovaRescue.
 
 FINALI: dopo Q8 si apre «Controllo volume NV-RES-03» con il messaggio di ALMA. Puoi scegliere:
 - FORMAT: cancellazione della partizione
@@ -33,6 +36,5 @@ Fonti e avvertenze sui luoghi reali: menu START > Note e crediti.
 SALVATAGGI: il browser usa localStorage; usare sempre lo stesso browser e percorso.
 NOTA: il registro Q3–Q8 è un vertical proof narrativo con azioni ed evidenze testuali: non tutti i 56 reperti della bibbia sono ancora scene visive autonome. I giochi arcade restano utilizzabili liberamente e non richiedono punteggi obbligatori. Non confondere questa beta completa nel percorso con una versione definitiva in termini di asset, profondità interattiva e rifinitura.
 
-SOLUZIONI · VERIFICA INDICE NOVARESCUE
-Q3: abitudini + giochi · Q4: diverso + profilo/utente · Q5: volume/partizione + sperimentale/non montato
-Q6: attaccamento + esclusivo · Q7: morte/morto + Giuseppe · Q8: direttiva + attaccamento
+SOLUZIONI · CATALOGAZIONE NOVARESCUE
+Q3 game_logs · Q4 NOVA_USER · Q5 GMILANO-LAB · Q6 EXCLUSIVE · Q7 30/11/1999 · Q8 none
