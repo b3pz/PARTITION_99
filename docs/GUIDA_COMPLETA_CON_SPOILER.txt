@@ -5,10 +5,10 @@ Apri index.html con un browser e attendi BIOS, caricamento e desktop. Conserva i
 
 Q1: Risorse del computer > Disco C > Diagnostica/Analisi approfondita. In Documenti leggi diagnostica_nova.txt (NV-RES-03).
 Q2: NavigaNova > www.goolarno.it > ricerca NV-RES-03 > discussione Forum NOVANET > archivio NovaRescue 1.2 > Scarica. Leggi novarescue_rapporto.txt.
-ATTO I: NOVA Messenger > Matteo_N. Rispondi con sincerità e rispetto: Matteo concede il contatto di Edoardo e la fotografia solo quando si fida (se lo hai offeso, scusati; «Che rapporto avevate?» aumenta la fiducia). Con Edoardo chiedi solo una copia in sola lettura. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
+ATTO I: NOVA Messenger > Matteo_N. Rispondi con sincerità e rispetto: Matteo concede il contatto di Edoardo e la fotografia solo quando si fida (se lo hai offeso, scusati; se rifiuta la foto, rispondigli che resterà tra voi). Con Edoardo chiedi solo una copia in sola lettura. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
 Da qui la demo precedente terminava con «Non torni più da me?». Ora continua.
 
-REGISTRO DISCO = NOVARESCUE 1.2. Dopo la firma MONTANINO apri «Registro disco» dal menu START (o il pulsante «Registro recupero GM-LAB» in fondo all’Archivio). Si apre NovaRescue con le cartelle recuperate, sbloccate una alla volta.
+REGISTRO DISCO = NOVARESCUE 1.2. Dopo la firma MONTANINO apri «Registro disco» dal menu START (o la prima voce «Registro recupero GM-LAB» nell’Archivio). Si apre NovaRescue con le cartelle recuperate, sbloccate una alla volta.
 Per ogni cartella apri almeno una COPPIA di file (i primi due oppure gli ultimi due), poi premi «Verifica indice» e scrivi una breve conclusione. «Nota tecnica» mostra una frase che viene sempre accettata.
 
 Q3 — GM-LAB / PROGRAMMI (ASTRO_V.BAK + ASTRO.INI oppure GM_97.LOG + HELP.TXT): le abitudini registrate dai giochi.
@@ -24,7 +24,9 @@ FINALI: dopo Q8 si apre «Controllo volume NV-RES-03» con il messaggio di ALMA.
 - RELEASE: rimozione della direttiva di attaccamento
 Per l'epilogo Y2K, spunta «Analizza il backup Y2K» PRIMA della scelta finale.
 Dopo un finale puoi premere un altro pulsante, o riaprire Registro disco, per vedere un finale diverso senza ricominciare.
-L’Archivio reperti (56) del menu START resta consultabile come approfondimento, ma non è più richiesto per avanzare.
+L’Archivio reperti (56) del menu START è un approfondimento facoltativo: le schede si sbloccano man mano che avanzi nel registro.
+Signal Maze e Pixel Runner sono facoltativi; in Pixel Runner gli ostacoli vanno saltati.
+Fonti e avvertenze sui luoghi reali: menu START > Note e crediti.
 
 SALVATAGGI: il browser usa localStorage; usare sempre lo stesso browser e percorso.
 NOTA: il registro Q3–Q8 è un vertical proof narrativo con azioni ed evidenze testuali: non tutti i 56 reperti della bibbia sono ancora scene visive autonome. I giochi arcade restano utilizzabili liberamente e non richiedono punteggi obbligatori. Non confondere questa beta completa nel percorso con una versione definitiva in termini di asset, profondità interattiva e rifinitura.
