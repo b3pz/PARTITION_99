@@ -23,7 +23,7 @@ const LINES={
 function endingLines(){const e=reg().ending;if(e==='RELEASE')return {levelstart:['Ciao. Cosa facciamo oggi?'],levelclear:['Questo percorso è il tuo.'],gameover:['Riprova, se ti va.'],win:['Bella partita.']};return null}
 window.P99Alma={
  stage,vars:()=>({...A}),
- gameMessage(game,type){const s=stage();if(s===0)return '';const pool=(s===6?endingLines():LINES[s])?.[type];if(!pool)return '';if(type==='levelstart'&&Math.random()<0.5)return '';return pick(pool)},
+ gameMessage(game,type){const s=stage();if(s===0)return '';if(game==='maze'&&type==='levelclear'&&Number(reg().depth)===4)return 'Non giochi come lui.';const pool=(s===6?endingLines():LINES[s])?.[type];if(!pool)return '';if(type==='levelstart'&&Math.random()<0.5)return '';return pick(pool)},
  glitch(){const s=stage();if(s<3||s===6)return 0;return clamp((s===3?0.12:s===4?0.4:0.25)+A.threat*0.06,0,0.85)},
  // Prove nei giochi: ALMA ti costringe a giocare come Giuseppe per vedere se «ti ricordi chi sei».
  test(game){const s=stage();if(s===6)return null;const from={maze:2,runner:3,bricks:3,invaders:4}[game];return from&&s>=from?{stage:s}:null},

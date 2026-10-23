@@ -67,7 +67,7 @@ function showGallery(){const gallery=[['Paesaggio Valdarno', 'sky'],['Figline so
 // Durante le ultime fasi dell'indagine (Q7-Q8) il frammento di ALMA in Astro V non accetta di sparire; dopo il finale sì.
 function astroLocked(){try{const d=JSON.parse(localStorage.getItem('partition99-completa-v1')||'{}');return d.depth>=7&&!d.ending}catch{return false}}
 function astroContext(x,y){wmenu.replaceChildren();const title=document.createElement('div');title.className='nova-wall-title';title.textContent='Astro V';wmenu.append(title);function a(label,fn){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{hide();fn()};wmenu.append(b)}
-a('Parla con Astro V',()=>openApp('astro'));a('Informazioni',()=>notify('Astro V · Versione: sconosciuta · Produttore: sconosciuto.'));
+a('Parla con Astro V',()=>openApp('astro'));a('Proprietà',()=>window.P99Act2?window.P99Act2.astroProps():notify('Astro V'));
 if(astroLocked()){a('Riduci a icona (non disponibile)',()=>{if(typeof astroSay==='function')astroSay('Non posso ancora sparire. Non adesso.');notify('Il modulo di assistenza non risponde al comando.')})}
 else{a('Riduci a icona',()=>{const w=document.getElementById('astro-widget');w.style.display='none';notify('Astro V ridotto a icona. Apri Astro V dal desktop per ripristinarlo.')})}
 wmenu.hidden=false;wmenu.style.left=Math.max(2,Math.min(x,innerWidth-320))+'px';wmenu.style.top=Math.max(2,Math.min(y,innerHeight-wmenu.offsetHeight-6))+'px'}

@@ -34,7 +34,7 @@ const MAZES=[
 ["###################","#o..#.........#..o#","#.#.#.#######.#.#.#","#.#...#.....#...#.#","#.###.#.#G#.#.###.#","#.......#G#.......#","#.#####.#.#.#####.#","#.......#P#.......#","###.###.#.#.###.###","#...#.........#...#","#.#.#.#######.#.#.#","#o#.............#o#","###################"],
 ["###################","#o.....#...#.....o#","#.###.#.#.#.#.###.#","#.#.....#G#.....#.#","#.#.###.#G#.###.#.#","#.....#.#G#.#.....#","#####.#.#.#.#.#####","#.........P.......#","#.###.#####.###.#.#","#...#...#...#...#.#","###.#.#.#.#.#.#.#.#","#o....#...#...#..o#","###################"]];
 const HIST=[['GM_70',14820,'30/11/99'],['GM_70',12950,'14/11/99'],['GM_70',11200,'28/10/98'],['GM_70',9600,'17/10/98']];
-function mazeTable(){let t=[];try{t=JSON.parse(localStorage.getItem('nova2000-maze-scores')||'[]')}catch{}return HIST.concat(t).sort((a,b)=>b[1]-a[1]).slice(0,6)}
+function mazeTable(){let t=[];try{t=JSON.parse(localStorage.getItem('nova2000-maze-scores')||'[]')}catch{}const ghost=window.P99Act2?.mazeGhostRow?.();if(ghost)t=t.concat([ghost]);return HIST.concat(t).sort((a,b)=>b[1]-a[1]).slice(0,6)}
 function mazeRecord(score){if(!score)return;let t=[];try{t=JSON.parse(localStorage.getItem('nova2000-maze-scores')||'[]')}catch{}t.push(['NOVA_USER',score,'23/12/99']);t.sort((a,b)=>b[1]-a[1]);try{localStorage.setItem('nova2000-maze-scores',JSON.stringify(t.slice(0,5)))}catch{}}
 
 launchMaze=function(){

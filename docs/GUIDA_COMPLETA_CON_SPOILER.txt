@@ -13,8 +13,8 @@ Da qui la demo precedente terminava con «Non torni più da me?». Ora continua.
 REGISTRO DISCO = NOVARESCUE 1.2. Dopo la firma MONTANINO apri «Registro disco» dal menu START (o la prima voce «Registro recupero GM-LAB» nell’Archivio). Si apre NovaRescue con le cartelle recuperate, sbloccate una alla volta.
 Per ogni cartella apri almeno un file, premi «Verifica indice» e rispondi alla domanda di catalogazione con un dato preciso letto nei file. «Sintesi automatica» dà prima un'indicazione generica, poi il file e la voce da guardare.
 
-Q3 — GM-LAB / PROGRAMMI: fonte di apprendimento → game_logs / i giochi (ASTRO.INI).
-Q4 — GM-LAB / SALVATAGGI: profilo che non corrisponde → NOVA_USER (PROFILE.IDX).
+Q3 — GM-LAB / PROGRAMMI: Verifica indice segnala il registro sessioni mancante → Astro V › Proprietà (GMILANO_70, SESSIONI.LOG) › Cerca «GMILANO_70» › apri SESSIONI.LOG. Si ricompone da solo.
+Q4 — GM-LAB / SALVATAGGI: manca un profilo di gioco recente → apri Signal Maze (record GM_70 di oggi) e completa un livello. ALMA: «Non giochi come lui».
 Q5 — NV-RES-03 / INDICI: proprietario del volume → GMILANO-LAB (NVRES.SIG). Aprendo NEGATIVI.DAT si estrae 171098_NEG.BMP: in Disegno «Inverti colori» rivela la data 17 10 '98 e il biglietto.
 Q6 — NV-RES-03 / ALMA: priorità impostata nel 02/1999 → EXCLUSIVE (DIRECTIVE.CFG).
 Q7 — NV-RES-03 / MEMORIA: ultima sessione → 30/11/1999 (CRONO.DAT).
@@ -40,4 +40,4 @@ SALVATAGGI: il browser usa localStorage; usare sempre lo stesso browser e percor
 NOTA: i quattro giochi (Signal Maze, Pixel Runner, Spaccamattoni, Difesa Orbitale) sono liberi e non richiedono punteggi per avanzare. I 56 reperti restano nei documenti di progetto (docs/), non più nel menu del PC.
 
 SOLUZIONI · CATALOGAZIONE NOVARESCUE
-Q3 game_logs · Q4 NOVA_USER · Q5 GMILANO-LAB · Q6 EXCLUSIVE · Q7 30/11/1999 · Q8 none
+Q3 Astro › Cerca GMILANO_70 › SESSIONI.LOG · Q4 Signal Maze, un livello · Q5 GMILANO-LAB · Q6 EXCLUSIVE · Q7 30/11/1999 · Q8 none
