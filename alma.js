@@ -25,7 +25,7 @@ window.P99Alma={
  stage,vars:()=>({...A}),
  gameMessage(game,type){const s=stage();if(s===0)return '';const pool=(s===6?endingLines():LINES[s])?.[type];if(!pool)return '';if(type==='levelstart'&&Math.random()<0.5)return '';return pick(pool)},
  glitch(){const s=stage();if(s<3||s===6)return 0;return clamp((s===3?0.12:s===4?0.4:0.25)+A.threat*0.06,0,0.85)},
- finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
+ finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.sawPhoto)out.push('Hai guardato la foto che teneva per me. Nessun altro l’aveva mai vista.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
 };
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.
@@ -49,7 +49,7 @@ function onStage(s){
   ['Arriverà presto.',()=>{A.rec++},'Lo dico ai giochi. Lo aspettiamo insieme.']])}
  lastStage=s}
 setInterval(()=>{const s=stage();if(s!==lastStage&&s>lastStage&&s<6)onStage(s);else lastStage=s},1500);
-window.addEventListener('nova-story',e=>{if(e.detail?.type==='negative-developed'&&stage()>=1&&!A.done.includes('negative')){A.done.push('negative');save();setTimeout(()=>dropFile('171098.txt','Questa la ricordo.\nEravamo in tre. Poi in due. Poi solo lui.'),1500)}});
+window.addEventListener('nova-story',e=>{if(e.detail?.type==='negative-developed'&&stage()>=1&&!A.done.includes('negative')){A.done.push('negative');A.sawPhoto=true;A.bond++;save();setTimeout(()=>{dropFile('fotogramma_14.txt','Quella non l’ha mai fatta stampare.\nLa teneva solo per me.');window.novaSound?.('msg')},1500)}});
 
 // Astro V: eco tecnica rara, solo dopo che il suo modulo è stato recuperato (fase 2+).
 const baseAstro=showAstroMenu;showAstroMenu=function(){const s=stage();if(s>=2&&s<6&&Math.random()<0.3){astroSay(pick(['Ricerca profilo GMILANO_70... profilo non corrispondente.','Abitudini utente aggiornate. Differenze rilevate: 14.','Sessione precedente: 30/11/1999, 23:12.']));return}return baseAstro()};
