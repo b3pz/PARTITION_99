@@ -1,0 +1,14 @@
+
+PARTITION_99 / RETCON CANONICA v13
+
+Decisioni implementate:
+- Il sistema operativo ora usa il branding NOVA 2000 / NOVA OS 2000.
+- Giuseppe Milano resta il programmatore informatico e creatore di ALMA.
+- Matteo Niccheri resta il migliore amico di Giuseppe.
+- Edoardo Cattani sostituisce Giulia come interlocutore tecnico attivo ed ex collega.
+- Giulia non è più un contatto attivo nel flusso principale della beta.
+- Maze Muncher viene rinominato in Signal Maze 2000 come arcade originale del progetto.
+- Testi, chat, reperti e note di produzione sono stati riallineati al canone sopra descritto.
+
+Nota tecnica:
+Le variabili di stato interne possono ancora usare nomi legacy (es. chapter.giulia) per evitare di rompere i salvataggi precedenti. Questo non influisce sui testi visibili al giocatore.
