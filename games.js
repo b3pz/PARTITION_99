@@ -127,6 +127,7 @@ launchRunner=function(){
   if(mode==='dying'){p.vy+=0.5;p.y+=p.vy;if(--timer<=0){if(lives<=0){mode='over';saveScore('runner',score);msg=emit('runner','gameover',{level:level+1,score})||'';say('error')}else{load(level);startLevel()}}return}
   if(mode==='clear'){if(--timer<=0){level++;if(level>=LEVELS.length){mode='win';saveScore('runner',score);msg=emit('runner','win',{score,signals})||'';say('tada')}else{load(level);startLevel()}}return}
   if(mode!=='play')return;
+  if(!live.n){const feed=window.P99Act2?.runnerFeed?.(level+1);if(feed){live.t=feed;live.n=330}}
   const acc=0.45,max=2.8;if(held.left){p.vx=Math.max(-max,p.vx-acc);p.face=-1}else if(held.right){p.vx=Math.min(max,p.vx+acc);p.face=1}else p.vx*=0.75;if(Math.abs(p.vx)<0.05)p.vx=0;
   coyote=p.ground?6:Math.max(0,coyote-1);if(held.jump&&coyote>0){p.vy=-9.2;coyote=0;held.jump=false;say('jump')}
   p.vy=Math.min(10,p.vy+0.48);collide(p,14,18);if(p.inv>0)p.inv--;
