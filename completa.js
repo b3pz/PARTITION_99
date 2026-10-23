@@ -75,7 +75,7 @@ body.querySelectorAll('[data-finale]').forEach(b=>b.onclick=()=>{const kind=b.da
 }
 window.addEventListener('repertory-updated',()=>{if(el.isConnected)render()});render();createWindow('recovery','Archivio recupero GM-LAB',el,{width:690,height:560})}
 const oldOpen=openApp;openApp=function(app){if(app==='recovery'){if(booting)return;showWindow();return}return oldOpen(app)};
-const oldArchive=launchArchive;launchArchive=function(){oldArchive();setTimeout(()=>{let p=document.querySelector('.window.active .novapanel');if(!p)return;const btn=document.createElement('button');btn.textContent='📂 Registro recupero GM-LAB';btn.style.margin='12px';btn.onclick=showWindow;p.append(btn)},0)};
+const oldArchive=launchArchive;launchArchive=function(){oldArchive();setTimeout(()=>{let p=document.querySelector('.window.active .novapanel');if(!p)return;const btn=document.createElement('button');btn.textContent='📂 Registro recupero GM-LAB';btn.style.margin='12px';btn.onclick=()=>openApp("recovery");p.append(btn)},0)};
 // Il registro risiede in Risorse del computer, come una normale utility opzionale.
 const icon=document.createElement('div');icon.className='desktop-icon';icon.dataset.app='recovery';icon.tabIndex=0;icon.style.cssText='position:relative;cursor:default;';icon.innerHTML='<div style="font-size:32px">🗂️</div><span>Registro disco</span>';
 // Il registro resta accessibile dall'Archivio e dal menu START: non sovrapporre icone sul desktop.
