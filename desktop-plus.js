@@ -40,9 +40,10 @@ host.addEventListener('pointerup',finish,true);host.addEventListener('pointercan
 host.addEventListener('dblclick',e=>{if(suppress){e.stopImmediatePropagation();e.preventDefault()}},true);
 window.addEventListener('resize',applyPositions);
 applyPositions();
-function tick(){// Data della finzione, non data reale del dispositivo.
-const d=new Date(1999,11,23,21,0,0);clock.innerHTML='<span>23/12/1999</span><strong>21:00</strong>';clock.title='Giovedì 23 dicembre 1999 — ora del sistema NOVA'}
-tick();setInterval(tick,30000);
+const NOVA_EPOCH_KEY='nova2000-clock-start-v1';
+let startAt=Number(sessionStorage.getItem(NOVA_EPOCH_KEY));if(!startAt||startAt>Date.now()){startAt=Date.now();sessionStorage.setItem(NOVA_EPOCH_KEY,String(startAt))}
+function tick(){const elapsed=Math.max(0,Date.now()-startAt);const date=new Date(Date.UTC(1999,11,23,21,0,0)+elapsed);const pad=n=>String(n).padStart(2,'0');const time=pad(date.getUTCHours())+':'+pad(date.getUTCMinutes());clock.innerHTML='<span>'+pad(date.getUTCDate())+'/'+pad(date.getUTCMonth()+1)+'/'+date.getUTCFullYear()+'</span><strong>'+time+'</strong>';clock.title='Ora simulata NOVA 2000, avanza dal 23/12/1999 alle 21:00'}
+tick();setInterval(tick,10000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
 function applyWallpaper(){
 desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';
