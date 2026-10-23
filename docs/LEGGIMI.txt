@@ -1,0 +1,6 @@
+PARTITION_99 — ARCHIVIO REPERTI / BUILD APPROFONDITA v1
+Apri index.html mantenendo nella stessa cartella tutti i file.
+Dal menu START scegli «Archivio reperti (56)» e consulta le raccolte Q1–Q8.
+Per la storia completa utilizza GUIDA_COMPLETA_CON_SPOILER.txt.
+NOVA 2000 resta graficamente provvisorio.
+Questa build NON contiene ancora 56 asset visivi finali.
