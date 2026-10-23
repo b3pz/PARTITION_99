@@ -51,7 +51,7 @@ function chat(){
   arr.push(['Per ora basta così.',()=>M('Va bene. Scrivimi se trovi qualcosa che pensi dovrei sapere.')]);
   arr.hub=true;choose('m',arr)}
  function matteo(){
-  if(!gameState.q2){notice('m','Profilo remoto non riconosciuto. Prima recupera l’account storico dal disco.');return}
+  if(!gameState.q2){notice('m','Nessun contatto in rubrica per questo profilo.');return}
   if(state.m===0){sys('m','Matteo_N è online.','Server');M('...Giuseppe?');M('Scusa. Ho visto un nome che non appariva più da settimane. Chi sei?');
    choose('m',[['Ho comprato il computer usato. Non sapevo fosse suo.',()=>{state.mt+=2;state.m=1;persist();M('Capisco. Vedere quell’account connesso mi ha tolto il fiato. Giuseppe era il mio migliore amico.');matteo()}],['Ho trovato dei file e vorrei capire a chi appartenevano.',()=>{state.mt+=1;state.m=1;persist();M('Non è una curiosità innocente. Non per me.');matteo()}],['Sono Giuseppe.',()=>{state.lie=true;state.mt=-2;state.m=1;persist();M('Non farlo. Ero presente quando gli abbiamo detto addio. Se è uno scherzo, smettila.');matteo()}]]);return}
   if(state.m===1){M(state.lie?'Se vuoi ancora parlarmi, devi dirmi la verità.':'Prima di continuare: perché cerchi informazioni su di lui?');
@@ -69,7 +69,7 @@ function chat(){
   arr.push(['Per ora basta così.',()=>E('È quello che farei anch’io: confronta sempre almeno due fonti.')]);arr.hub=true;choose('e',arr)}
  function volume(){state.volume=true;persist();E('NV-RES-03... Era il volume di test di Giuseppe. Lo teneva fuori dai backup ordinari.');E('Chi ha reinstallato il sistema avrà rifatto solo C:, quindi è ancora lì. Non formattarlo: leggilo soltanto.')}
  function edoardo(){
-  if(!gameState.q2||!state.referral){notice('e','Edoardo_C non è nella rubrica. Occorre ottenere un contatto da qualcuno che lo conosca.');return}
+  if(!gameState.q2||!state.referral){notice('e','Edoardo_C non è nella rubrica.');return}
   if(state.e===0){E('Matteo mi ha scritto. Mi ha detto che hai il computer di Giuseppe.');E('L’ho saputo solo due settimane fa. Ancora non riesco a crederci.');E('Non lavoravamo più insieme da un po’. Di quel periodo mi restano soltanto i miei appunti di laboratorio, del ’97. Cosa vuoi sapere?');
    choose('e',[['Nel disco mancano 3 GB: c’è un volume chiamato NV-RES-03.',()=>{state.et+=1;state.e=1;persist();volume();edoardo()}],['Credo che Giuseppe avesse nascosto un programma.',()=>{state.e=1;persist();E('“Nascosto” è una parola grossa. Hai un rapporto del disco oppure solo supposizioni?');edoardo()}],['Matteo ha detto che sei tu quello che sa tutto.',()=>{state.et-=1;state.e=1;persist();E('Matteo non può aver detto questo. Nessuno di noi sapeva tutto di quel progetto.');edoardo()}]]);return}
   if(state.e===1){E('Se ti mando i miei appunti, che uso ne faresti?');

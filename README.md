@@ -5,7 +5,7 @@ Gioco narrativo investigativo ambientato nel Valdarno alla fine del 1999.
 **Gioca:** https://b3pz.github.io/PARTITION_99/
 
 ## Come giocare
-Apri il link con un browser moderno e premi il pulsante di accensione (attiva anche l’audio). Leggi la nota del tecnico in Documenti e collegati a Internet con il modem. Naviga nel finto sistema operativo NOVA 2000, consulta Goolarno, parla su NOVA Messenger, usa gli archivi e ricostruisci le tracce di ALMA. La storia prevede tre conclusioni: FORMAT, ARCHIVE, RELEASE.
+Apri il link con un browser moderno (l’audio si attiva al primo tocco o clic). Leggi la nota del tecnico in Documenti e collegati a Internet con il modem. Naviga nel finto sistema operativo NOVA 2000, consulta Goolarno, parla su NOVA Messenger, usa gli archivi e ricostruisci le tracce di ALMA. La storia prevede tre conclusioni: FORMAT, ARCHIVE, RELEASE.
 
 ## Supporto mobile
 La schermata è stata adattata per schermi piccoli; le finestre assumono il formato quasi a tutto schermo. Signal Maze e Pixel Runner hanno controlli a schermo per touch. Su desktop puoi usare frecce/WASD. Salvataggi e progressione usano la memoria locale del browser: passando a un altro dispositivo la partita non si trasferisce automaticamente.

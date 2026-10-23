@@ -1,6 +1,6 @@
 /* NOVA 2000 — suoni di sistema sintetizzati con Web Audio (nessun file audio).
    window.novaSound(nome) è richiamato dagli altri script; l'altoparlante nella barra attiva/disattiva l'audio.
-   window.novaPowerOn(avvio) mostra il pulsante di accensione: il primo tocco sblocca l'audio nel browser. */
+   Il browser sblocca l'audio solo al primo tocco o clic sulla pagina: prima di allora i suoni restano muti. */
 (()=>{'use strict';
 const MUTE_KEY='nova2000-audio-muted';
 let muted=false;try{muted=localStorage.getItem(MUTE_KEY)==='1'}catch{}
@@ -62,7 +62,6 @@ if(clock){const b=document.createElement('button');b.id='nova-volume';b.classNam
 // Accensione e riavvio: bip del POST, testine del disco, sigla di avvio a desktop pronto.
 const baseBoot=boot;
 boot=async function(){if(booting)return;novaSound('post');setTimeout(()=>novaSound('disk'),900);setTimeout(()=>novaSound('disk'),2400);await baseBoot();if(document.getElementById('desktop').classList.contains('ready'))novaSound('startup')};
-window.novaPowerOn=start=>{const s=document.createElement('div');s.style.cssText='position:fixed;inset:0;z-index:20002;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;font:15px Arial,Helvetica,sans-serif;color:#777';s.innerHTML='<div style="width:92px;height:92px;border-radius:50%;border:3px solid #555;display:flex;align-items:center;justify-content:center;font-size:46px;color:#9a9a9a">⏻</div><div>Premi per accendere il computer</div><small style="color:#444">L’audio si attiva con l’accensione · 🔊 nella barra per disattivarlo</small>';document.body.append(s);s.addEventListener('click',()=>{audio();novaSound('power');s.remove();boot()},{once:true});document.getElementById('bios-screen')?.classList.add('hidden')};
 
 // Suoni legati agli eventi: messaggi, notifiche, errori e giochi.
 document.getElementById('start')?.addEventListener('click',()=>novaSound('click'));
