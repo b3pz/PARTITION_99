@@ -1,0 +1,27 @@
+PARTITION_99 — RC funzionale, prima passata
+
+MODIFICHE APPORTATE
+- Rimosso il popup JavaScript nativo al download di NovaRescue: usa una notifica interna a NOVA OS.
+- Eliminata la seconda icona 'Registro disco' che si sovrapponeva a Risorse del computer: il registro rimane raggiungibile da START e Archivio.
+- Aggiunta Manutenzione da START, con esportazione JSON del salvataggio e nuova partita tramite conferma interna alla finestra.
+- Rimossa la sostituzione globale window.alert, che mascherava invece di correggere gli alert.
+- Invariati grafica, enigmi e tre finali rispetto alla beta di partenza.
+
+VERIFICHE EFFETTUATE
+- Sintassi JavaScript inline: superata (Node.js --check).
+- Sintassi completa.js: superata (Node.js --check).
+- Ricerca statica di alert()/confirm()/prompt(): zero occorrenze.
+- Browser automatico: NON eseguito con successo. Chromium ha restituito ERR_BLOCKED_BY_ADMINISTRATOR tanto su file:// quanto su localhost. NON è possibile certificare una partita completa attraverso il browser in questa sessione.
+
+LIMITI NOTI
+- Le Q3-Q8 sono ancora registri investigativi semplificati; non equivalgono agli enigmi completi dei 56 reperti.
+- La grafica resta volutamente grezza come richiesto.
+- Le tre scelte finali sono definite nel codice ma necessitano collaudo interattivo reale.
+- Il salvataggio JSON è esportabile, ma la reimportazione da interfaccia non è ancora disponibile.
+
+COLLAUDO MANUALE CONSIGLIATO
+1. Scaricare, estrarre, aprire index.html nella stessa cartella dei file accessori.
+2. Risorse del computer -> Disco C -> diagnostica; Goolarno -> NovaRescue -> Chat Matteo -> Edoardo -> Archivio -> Maze, firma MONTANINO.
+3. Archivio oppure menu START -> Registro disco; completare le due azioni per Q3-Q8.
+4. Provare RELEASE, 'Rivedi il finale', poi ARCHIVE e FORMAT.
+5. Dal menu START -> Manutenzione: esportare salvataggio; usare Nuova partita e verificare che la diagnostica torni inesplorata.
