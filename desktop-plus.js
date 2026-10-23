@@ -44,7 +44,14 @@ function tick(){// Data della finzione, non data reale del dispositivo.
 const d=new Date(1999,11,23,21,0,0);clock.innerHTML='<span>23/12/1999</span><strong>21:00</strong>';clock.title='Giovedì 23 dicembre 1999 — ora del sistema NOVA'}
 tick();setInterval(tick,30000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
-function applyWallpaper(){desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}else if(wallpaper.kind==='sky'){desk.style.background='linear-gradient(180deg,#4c83c5 0%,#b3dcfc 60%,#2d784a 61%,#1c482f 100%)'}else if(wallpaper.kind==='night'){desk.style.background='radial-gradient(circle at 78% 18%,#ece7ae 0 2%,transparent 3%),linear-gradient(135deg,#050d25,#1d3554 55%,#081027)'}else if(wallpaper.kind==='image'){desk.style.background='#223 url("'+wallpaper.src+'") center center / cover no-repeat'}else if(wallpaper.kind==='drawing'&&drawing){desk.style.background='#223 url("'+drawing+'") center center / contain no-repeat'} }
+function applyWallpaper(){
+desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';
+if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
+else if(wallpaper.kind==='sky'){desk.style.background='linear-gradient(172deg,transparent 0 43%,#7e9aab 43.2% 49%,transparent 49.3%),linear-gradient(166deg,transparent 0 51%,#46677e 51.2% 61%,transparent 61.3%),linear-gradient(12deg,#355c42 0 15%,transparent 15.3%),linear-gradient(180deg,#5388bc 0%,#a8cae0 43%,#dde0c1 52%,#527568 70%,#244b35 100%)';desk.style.backgroundSize='cover'}
+else if(wallpaper.kind==='night'){desk.style.background='radial-gradient(circle at 72% 18%,#f7edbb 0 1.1%,#dfdfb97a 1.4%,transparent 3%),radial-gradient(circle at 24% 28%,#fafad9 0 0.08%,transparent .22%),radial-gradient(circle at 44% 12%,white 0 .08%,transparent .2%),linear-gradient(155deg,transparent 0 56%,#111f34 56.3% 70%,transparent 70.2%),linear-gradient(172deg,#08162d,#243c56 62%,#0b2026 63%,#061422)'}
+else if(wallpaper.kind==='image'){desk.style.background='#223 url("'+wallpaper.src+'") center center / cover no-repeat'}
+else if(wallpaper.kind==='drawing'&&drawing){desk.style.background='#223 url("'+drawing+'") center center / contain no-repeat'}
+}
 applyWallpaper();
 const wmenu=document.createElement('div');wmenu.className='nova-wallpaper-menu';wmenu.hidden=true;document.body.append(wmenu);
 function hide(){wmenu.hidden=true}
