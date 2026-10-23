@@ -5,7 +5,7 @@ Apri index.html con un browser e attendi BIOS, caricamento e desktop. Conserva i
 
 Q1: Risorse del computer > Disco C > Diagnostica/Analisi approfondita. In Documenti leggi diagnostica_nova.txt (NV-RES-03).
 Q2: NavigaNova > www.goolarno.it > ricerca NV-RES-03 > discussione Forum NOVANET > archivio NovaRescue 1.2 > Scarica. Leggi novarescue_rapporto.txt.
-ATTO I: NOVA Messenger > Matteo_N. Rispondi con sincerità e rispetto: Matteo concede il contatto di Edoardo e la fotografia solo quando si fida (se lo hai offeso, scusati; se rifiuta la foto, rispondigli che resterà tra voi). Con Edoardo chiedi solo una copia in sola lettura. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
+ATTO I: NOVA Messenger > Matteo_N (ogni contatto ha la sua conversazione). Rispondi con sincerità e rispetto. Chiedigli dove lavorava Giuseppe: parlerà del GM-LAB e dell’ultima foto di loro tre (ottobre ’98); poi chiedigli di vederla e chi conosceva i suoi esperimenti. Se lo hai offeso, scusati; se esita sulla foto, rispondigli che resterà tra voi. Con Edoardo_C chiedi solo una copia in sola lettura, poi gli appunti del 1997. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
 Da qui la demo precedente terminava con «Non torni più da me?». Ora continua.
 
 REGISTRO DISCO = NOVARESCUE 1.2. Dopo la firma MONTANINO apri «Registro disco» dal menu START (o la prima voce «Registro recupero GM-LAB» nell’Archivio). Si apre NovaRescue con le cartelle recuperate, sbloccate una alla volta.
