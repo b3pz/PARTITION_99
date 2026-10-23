@@ -3,6 +3,8 @@ GUIDA SPOILER — DALL'AVVIO AI TRE FINALI
 ========================================
 Apri index.html con un browser e attendi BIOS, caricamento e desktop. Conserva i file completa.js, astro-v.svg, foto_laboratorio.svg nella stessa cartella.
 
+AVVIO: premi il pulsante di accensione (attiva anche l’audio; 🔊 nella barra per disattivarlo).
+CONNESSIONE: in Documenti c’è LEGGIMI_PRIMA.txt, la nota del tecnico che ha sistemato il PC. Spiega come connettersi: «Connessione a Internet» sul desktop, numero 055 866 2096 (senza prefisso il gestore risponde che il numero è inesistente), Connetti. Senza connessione NavigaNova e NOVA Messenger non funzionano; l’icona accanto all’orologio disconnette. La nota cita anche i 3 GB non assegnati.
 Q1: Risorse del computer > Disco C > Diagnostica/Analisi approfondita. In Documenti leggi diagnostica_nova.txt (NV-RES-03).
 Q2: NavigaNova > www.goolarno.it > ricerca NV-RES-03 > discussione Forum NOVANET > archivio NovaRescue 1.2 > Scarica. Leggi novarescue_rapporto.txt.
 ATTO I: NOVA Messenger > Matteo_N (ogni contatto ha la sua conversazione). Rispondi con sincerità e rispetto. Chiedigli dove lavorava Giuseppe: parlerà del GM-LAB e dell’ultima foto di loro tre (ottobre ’98); poi chiedigli di vederla e chi conosceva i suoi esperimenti. Se lo hai offeso, scusati; se esita sulla foto, rispondigli che resterà tra voi. Con Edoardo_C chiedi solo una copia in sola lettura, poi gli appunti del 1997. Richiedi la fotografia, contatta Edoardo e richiedi i suoi appunti. Archivio > visualizza foto e apri gli appunti. Archivio > giochi/GM-LAB > Verifica classifica > inserisci MONTANINO.
