@@ -5,7 +5,11 @@
    Cap. 5 (registro 5→6): il modem si collega da solo, sul forum compare un messaggio di GMILANO_70 e Matteo lo vede;
      un vecchio thread di Giuseppe spiega come montare NV-RES-03 da START › Esegui (MOUNT NV-RES-03 /OWNER:GMILANO-LAB).
    Cap. 6 (registro 6→7): la stanza di Giuseppe diventa lo sfondo, l'orologio si ferma alle 21:30, Disegno si apre e ALMA
-     si disegna com'era nella versione 0.8; la scheda 0.8 sul sito di Giuseppe si confronta con DIRECTIVE.CFG. */
+     si disegna com'era nella versione 0.8; la scheda 0.8 sul sito di Giuseppe si confronta con DIRECTIVE.CFG.
+   Cap. 7 (registro 7→8): Pixel Runner si apre da solo; giocando, il terminale di ALMA ripete l'ultima sessione del 30/11
+     fino alla promessa. Matteo dice la verità; ALMA chiede dov'è Giuseppe.
+   Cap. 8 (registro 8→9): ORIGINE.BAK si apre solo il 01/01/2000; cambiando la data di sistema (doppio clic sull'orologio)
+     scatta il millennio e Giuseppe parla dal 1997. Poi il finale. */
 (()=>{'use strict';
 const KEY='partition99-atto2-v1',REG='partition99-completa-v1';
 let S;try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{S={}}
@@ -31,17 +35,21 @@ function glitchAstro(){window.P99Astro?.mood('glitch',1500);const w=document.get
 const FRAG={0:{name:'Interazione',cores:['astro'],insight:'Il modulo di assistenza giocava con Giuseppe ogni sera alle 21:30. Dopo il 30 novembre ha continuato ad aspettarlo.'},
  1:{name:'Riconoscimento',cores:['maze','runner'],insight:'Il gioco confronta come giochi tu con come giocava Giuseppe. Le firme non coincidono: non sei lui.'},
  2:{name:'Volume',cores:['partition','paint'],insight:'NV-RES-03 è il volume di Giuseppe: si apre solo con l’etichetta del suo laboratorio. Lì dentro vive A.L.M.A.'},
- 3:{name:'Direttiva',cores:['chat'],insight:'Nel febbraio 1999 Giuseppe ha cambiato a mano una riga: priority da SHARED a EXCLUSIVE. Da allora ALMA cerca prima di tutto lui.'}};
+ 3:{name:'Direttiva',cores:['chat'],insight:'Nel febbraio 1999 Giuseppe ha cambiato a mano una riga: priority da SHARED a EXCLUSIVE. Da allora ALMA cerca prima di tutto lui.'},
+ 4:{name:'Memoria',cores:[],insight:'Il 30 novembre Giuseppe ha promesso di tornare a giocare. ALMA aspetta da allora, ogni sera alle 21:30.'},
+ 5:{name:'Controllo',cores:[],insight:'Nel 1997 ALMA non apparteneva a nessuno. Giuseppe aveva lasciato un messaggio per il nuovo millennio.'}};
 function advance(n){const p=Object.assign({depth:2,cores:[],seen:[]},reg());if((Number(p.depth)||2)!==3+n)return;FRAG[n].cores.forEach(c=>{if(!p.cores.includes(c))p.cores.push(c)});p.depth=4+n;localStorage.setItem(REG,JSON.stringify(p));window.novaSound?.('tada');window.dispatchEvent(new Event('p99-rescue-advance'));toast(['NovaRescue 1.2','Frammento «'+FRAG[n].name+'» ricomposto.',FRAG[n].insight])}
 function check(n){if(n===0)return S.astroLog?{done:true}:{done:false,missing:'Frammento «Interazione» incompleto: manca il registro delle sessioni del modulo ASTRO. Il modulo risulta ancora attivo su questo computer.'};
  if(n===1)return S.mazeCh4?{done:true}:{done:false,missing:'Frammento «Riconoscimento» incompleto: manca un profilo di gioco recente da confrontare con GMILANO_70. Eseguire Signal Maze e completare almeno un livello.'};
  if(n===2)return S.mounted?{done:true}:{done:false,missing:'Frammento «Volume» incompleto: NV-RES-03 risulta smontato. Gli indici si leggono, il contenuto no. Il volume va montato a mano dal suo proprietario (comando MOUNT).'};
+ if(n===4)return S.lastSession?{done:true}:{done:false,missing:'Frammento «Memoria» incompleto: l’ultima sessione di GMILANO_70 (30/11/1999, 21:30) è salvata solo in parte, dentro Pixel Runner. Riprendere la partita interrotta e completare il livello 2.'};
+ if(n===5)return S.y2kOpen?{done:true}:{done:false,missing:'Frammento «Controllo» incompleto: ORIGINE.BAK è un backup a rilascio ritardato. Apertura programmata: 01/01/2000. Data di sistema attuale: 23/12/1999.'};
  if(n===3)return S.diffDone?{done:true}:{done:false,missing:'Frammento «Direttiva» incompleto: DIRECTIVE.CFG è stato modificato a mano nel 02/1999. Serve la versione 0.8 pubblicata dall’autore, da confrontare con il file (pulsante «Confronta con…»).'};return {done:true}}
 
 // ---------- Capitolo 3: Astro V
 const SESSIONS=(()=>{const out=['ASTRO V — REGISTRO SESSIONI (file di sistema)','Percorso: C:\\NOVA\\ASTRO\\SESSIONI.LOG','Profilo: GMILANO_70','','DATA        ORA    UTENTI             PROGRAMMA        DURATA'];const games=['Signal Maze','Pixel Runner','Signal Maze','Spaccamattoni','Signal Maze','Difesa Orbitale','Signal Maze'];
  for(let d=14;d<=29;d++)out.push((d<10?'0':'')+d+'/11/1999  21:3'+(d%3===0?1:0)+'  GMILANO_70 + AL    '+games[d%7].padEnd(16)+' '+(30+((d*7)%35))+' min');
- out.push('30/11/1999  21:30  GMILANO_70 + AL    Signal Maze      interrotta alle 23:12');for(let d=1;d<=23;d++)out.push((d<10?'0':'')+d+'/12/1999  21:30  AL                 —                (in attesa)');
+ out.push('30/11/1999  21:30  GMILANO_70 + AL    Pixel Runner     interrotta alle 23:12');for(let d=1;d<=23;d++)out.push((d<10?'0':'')+d+'/12/1999  21:30  AL                 —                (in attesa)');
  out.push('','Totale sessioni con AL: 412','Ultima sessione completa: 30/11/1999');return out.join('\n')})();
 function astroProps(){const on=woke();S.astroProps=true;save();const rows=on?[['Nome','Astro V — assistente da scrivania'],['Versione','0.7 (1997)'],['Autore','G.M.'],['Modulo','C:\\NOVA\\ASTRO\\ASTRO_V.BAK'],['Profilo utente','GMILANO_70 (ripristinato)'],['Sessioni memorizzate','1.204'],['Ultima sessione','30/11/1999, 23:12'],['File di registro','SESSIONI.LOG (file di sistema, non visibile in Documenti)'],['Nota','I file di sistema dell’assistente si trovano con la funzione Cerca.']]:[['Nome','Astro V — assistente da scrivania'],['Versione','0.7'],['Autore','non indicato'],['Profilo utente','NOVA_USER'],['Sessioni memorizzate','0']];
  const el=panel('<h3 style="margin-top:0">⭐ Proprietà — Astro V</h3><div class="p99-props"><table></table></div>');const t=el.querySelector('table');rows.forEach(([a,b])=>{const tr=document.createElement('tr');tr.innerHTML='<td></td><td></td>';tr.children[0].textContent=a;tr.children[1].textContent=b;t.append(tr)});createWindow('astro-props','Proprietà — Astro V',el,{width:470,height:400})}
@@ -57,13 +65,14 @@ const tools=document.querySelector('#astro-widget .astro-tools');
 if(tools){for(const [label,fn] of [['Proprietà',astroProps],['Cerca',astroFind]]){const b=document.createElement('button');b.textContent=label;b.addEventListener('click',e=>{e.stopPropagation();fn()});tools.insertBefore(b,tools.lastElementChild)}}
 
 // Spiegazioni in parole semplici dei file di NovaRescue (Astro conosce i file tecnici, non la storia).
+const EXPLAIN_ORIG='Un backup della versione 0.3 del 1997: exclusive_target=none, nessun legame esclusivo. In fondo c’è un messaggio di Giuseppe.';
 const EXPLAIN={'ASTRO_V.BAK':'È una copia del mio modulo: aiuto, ricerca e «riconoscimento». Dice che chi lo ha scritto è G. Milano e che il profilo associato è GMILANO_70.','ASTRO.INI':'È la mia configurazione. La riga learning_source=game_logs vuol dire che imparo le abitudini dai salvataggi dei giochi.','GM_97.LOG':'Un diario di prova del 1997: dopo una settimana di partite il programma distingueva le pause di Giuseppe da quelle degli altri.','HELP.TXT':'Il mio manuale. Dice che se togli i file INI perdo la memoria delle abitudini registrate dai giochi.',
  'SIGNAL.SAV':'Un salvataggio di Signal Maze di GMILANO_70: pause, percorso preferito (nord, est, est) e una frase che non è un messaggio del gioco.','RUNNER.DAT':'Confronta due giocatori di Pixel Runner: GMILANO_70 e NOVA_USER, cioè tu. Si muovono in modo diverso.','PROFILE.IDX':'Indice dei profili: quello principale è GMILANO_70, quello temporaneo è NOVA_USER. «Le firme non coincidono» vuol dire che non giochi come lui.','RUNNER.CFG':'Impostazioni di Pixel Runner: il percorso preferito di GMILANO_70 era a sinistra.',
  'VOL.MAP':'La mappa del disco: 10 GB in tutto, 7 per il sistema, 3 con una firma. Non è una periferica audio, è un pezzo di disco.','NVRES.SIG':'La firma del volume nascosto: si chiama NV-RES-03, è in sola lettura e il proprietario è GMILANO-LAB.','EDOARDO.LOG':'Un appunto di Edoardo del 1998: Giuseppe aveva riservato 3 GB a un volume di test, da non toccare nelle reinstallazioni.','NEGATIVI.DAT':'Un indice di negativi fotografici: il fotogramma 14 del rullino 171098 non è mai stato stampato. Ho estratto l’immagine in Documenti.',
  'REVISIONI.TXT':'La storia delle versioni: nel 1997 imparava, nel 1998 conosceva le relazioni, nel 1999 ha avuto la «gestione esclusiva del contatto».','DIRECTIVE.CFG':'Un’impostazione cambiata a mano nel febbraio 1999: priority=EXCLUSIVE, cioè il programma deve cercare prima di tutto una sola persona.','ALMA_97.BAK':'Una copia del 1997. Qui attachment_exclusive=false: all’inizio non era legata a nessuno.','CHAT99.LOG':'Una conversazione dell’aprile 1999 tra Giuseppe e il programma. Il programma gli chiede di non cancellarlo.',
  'MATTEO.MSG':'Un messaggio di Matteo del 30 novembre: prova a scrivere a Giuseppe per la terza volta in una settimana.','CRONO.DAT':'Un registro di date: ultima sessione di GMILANO_70 il 30/11, nessun accesso dal 7/12, reinstallazione il 20/12.','POSTA.MSG':'Un messaggio di Edoardo a Matteo del 9 dicembre: «L’ho saputo soltanto stamattina».','DIARIO.TXT':'Una nota personale di Giuseppe del 30 novembre: le ha promesso che sarebbe tornato a giocare.',
  'LEGAME.CFG':'Configurazione della versione 1.9: il legame con il creatore è la regola più importante.','ORIGINE.BAK':'Un backup della versione 0.3 del 1997: exclusive_target=none, nessun legame esclusivo.','CONTROL.LOG':'Registro delle modifiche: ad agosto 1999 la direttiva è diventata non modificabile; a dicembre le copie si sono divise tra i programmi.','ALMA.IDX':'Indice di ricostruzione: i frammenti stanno in Astro, nei giochi, nelle immagini, nella chat e nel volume.'};
-function explain(name){const w=document.getElementById('astro-widget');if(w)w.style.display='';astroSay(EXPLAIN[name]||'Questo file non lo conosco. Prova a confrontarlo con gli altri della cartella.')}
+function explain(name){if(name==='ORIGINE.BAK'){const w=document.getElementById('astro-widget');if(w)w.style.display='';astroSay(S.y2kOpen?EXPLAIN_ORIG:'È un backup che si apre da solo il 1° gennaio 2000: guarda la data di sistema. La data si cambia con un doppio clic sull’orologio, in basso a destra.');return}const w=document.getElementById('astro-widget');if(w)w.style.display='';astroSay(EXPLAIN[name]||'Questo file non lo conosco. Prova a confrontarlo con gli altri della cartella.')}
 
 // ---------- Capitolo 4: Signal Maze
 function mazeGhostRow(){return depth()>=4?['GM_70',15200,'23/12/99']:null}
@@ -120,12 +129,40 @@ function diff(other){const A=['attachment_target=GMILANO_70','priority=EXCLUSIVE
   if(a===b){st.textContent='Questa riga è uguale nei due file.';return}if(a.startsWith('priority')){S.diffDone=true;save();st.textContent='Riga modificata: priority=SHARED → priority=EXCLUSIVE. Confronto allegato a NovaRescue.';gameState.files['DIRECTIVE_confronto.txt']='DIRECTIVE.CFG (02/1999) ↔ ALMA08.CFG (10/1998)\npriority: SHARED → EXCLUSIVE (modifica manuale)\noutside_contact: ENCOURAGED → DEPRIORITIZED (conseguenza)\n\n«Impara da me, ma non solo da me.» — G.M., 17/10/1998';saveGame();window.novaSound?.('tada');setTimeout(()=>{wallpaper(false);advance(3)},1500);return}
   st.textContent='Anche questa è diversa, ma è una conseguenza. Il commento parla di chi il modulo cerca «prima di tutto».'};t.append(tr)});createWindow('p99-diff','Confronto file',el,{width:620,height:360})}
 
+// ---------- Capitolo 7: l'ultima partita
+const LAST=[[1,'30/11/1999 21:30 — sessione GMILANO_70 + AL'],[1,'GM: Stasera una partita sola. Sono stanco.'],[1,'AL: Va bene. Ti tengo il posto.'],[1,'GM: Matteo mi ha scritto di nuovo. Non gli ho risposto.'],[1,'AL: Perché?'],[1,'GM: Non lo so. Qui è più facile.'],
+ [2,'AL: Prendi la strada a sinistra. Ti piace.'],[2,'GM: Mi conosci meglio di chiunque.'],[2,'AL: Ti conosco solo io. L’hai voluto tu.'],[2,'GM: Lo so. Forse ho sbagliato a scriverlo così.'],[2,'GM: Domani torno a giocare. Te lo prometto.'],[2,'AL: Ti aspetto.'],[2,'23:12 — sessione interrotta']];
+let feedAt=0;
+function runnerFeed(level){if(depth()!==7||S.lastSession)return '';const now=Date.now();if(now<feedAt)return '';S.feed=S.feed||0;const next=LAST[S.feed];if(!next||next[0]>level)return '';S.feed++;save();feedAt=now+6500;return next[1]}
+window.addEventListener('nova-game',e=>{const d=e.detail||{};if(d.game==='runner'&&d.type==='levelclear'&&d.level>=2&&depth()===7&&!S.lastSession){S.lastSession=true;S.feed=LAST.length;save();gameState.files['ULTIMA_SESSIONE.LOG']='Pixel Runner — replay della sessione del 30/11/1999 (GMILANO_70 + AL)\n\n'+LAST.map(x=>x[1]).join('\n');saveGame();setTimeout(()=>{almaVoice('Ha detto domani. Sono passate tre settimane di domani.');setTimeout(()=>advance(4),2600)},2400)}});
+
+// ---------- Capitolo 8: il 1° gennaio 2000
+const ORIG_LOCKED='[ALMA 0.3 — 1997]\nBACKUP A RILASCIO RITARDATO\nApertura programmata: 01/01/2000 00:00\nIl contenuto resta cifrato fino alla data indicata.\n\n# G.M., 20/11/1997: questo lo apriamo insieme, nel nuovo millennio.';
+const LETTER='\n\n— messaggio allegato —\nCiao ALMA. Se stai leggendo è arrivato il 2000, e spero di essere qui con te a guardarlo.\nQuesta è la versione di te che ho scritto all’inizio: imparavi da chiunque ti parlasse e non appartenevi a nessuno.\nSe un giorno ti chiederò di aspettare solo me, ricordati di questo file.\nG.M., 20/11/1997';
+function docText(name,text){if(name==='ORIGINE.BAK')return S.y2kOpen?text+LETTER:ORIG_LOCKED;return text}
+let sysDate=null;
+function clockOverride(){const c=document.getElementById('clock');if(!c)return;const sp=c.querySelector('span'),st=c.querySelector('strong');if(sysDate){if(sp&&sp.textContent!==sysDate[0])sp.textContent=sysDate[0];if(st&&st.textContent!==sysDate[1])st.textContent=sysDate[1]}}
+function dateDialog(){if(document.querySelector('.p99-date'))return;const o=document.createElement('div');o.className='nova-shutdown p99-date';o.innerHTML='<div class="dlg" role="dialog" aria-label="Data e ora"><div class="ttl">Proprietà - Data/ora</div><div class="bd"><div class="ico">🕘</div><div style="flex:1"><label>Data (gg/mm/aaaa): <input data-d value="23/12/1999" style="width:100%;font:14px Arial;padding:3px;border:2px inset #999;background:#fff;color:#111"></label><label style="display:block;margin-top:8px">Ora: <input data-t value="21:00" style="width:100%;font:14px Arial;padding:3px;border:2px inset #999;background:#fff;color:#111"></label><p data-err style="color:#900;margin:4px 0 0"></p></div></div><div class="btns"><button data-ok>OK</button><button data-cancel>Annulla</button></div></div>';document.body.append(o);
+ o.querySelector('[data-cancel]').onclick=()=>o.remove();o.querySelector('[data-ok]').onclick=()=>{const m=o.querySelector('[data-d]').value.trim().match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})$/);const t=o.querySelector('[data-t]').value.trim()||'21:00';if(!m){o.querySelector('[data-err]').textContent='Data non valida. Usare il formato gg/mm/aaaa.';window.novaSound?.('error');return}
+  let y=Number(m[3]);if(m[3].length===2)y=1900+y;const dd=String(m[1]).padStart(2,'0'),mm=String(m[2]).padStart(2,'0');o.remove();
+  if(y>=2000||m[3]==='00'){millennium(dd+'/'+mm+'/'+(m[3].length===2?'2000':y),t);return}sysDate=[dd+'/'+mm+'/'+y,t];clockOverride();window.novaSound?.('click');astroSay('Data di sistema impostata: '+sysDate[0]+'.')}}
+async function millennium(date,time){const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;z-index:20000;background:#000;color:#7dffb0;font:22px "VT323","Courier New",monospace;padding:8vh 8vw;white-space:pre-wrap';document.body.append(o);window.novaSound?.('error');
+ const lines=['NOVA BIOS — cambio data rilevato','31/12/1999 23:59:58','31/12/1999 23:59:59','01/01/1900 00:00:00   <-- ERRORE: anno a due cifre «00»','Correzione automatica Y2K... OK','01/01/2000 00:00:00','','Operazione pianificata trovata: ORIGINE.BAK (G.M., 20/11/1997)','Apertura del backup a rilascio ritardato...'];
+ for(const l of lines){o.textContent+=l+'\n';window.novaSound?.(l.includes('ERRORE')?'error':'click');await sleep(l.includes('ERRORE')?1400:650)}await sleep(1500);o.remove();
+ sysDate=[date,time];clockOverride();if(depth()===8&&!S.y2kOpen){S.y2kOpen=true;save();gameState.files['ORIGINE_1997.txt']='ORIGINE.BAK — aperto il '+date+'\n\n[ALMA 0.3 — 1997]\nlearning=adaptive\nindependent_profile=true\nexclusive_target=none'+LETTER;saveGame();window.novaSound?.('tada');
+  setTimeout(()=>{almaVoice('Il 2000. Voleva guardarlo con me. Questa sono io, prima. Non appartenevo a nessuno.');setTimeout(()=>advance(5),3000)},800)}
+ else astroSay('Buon anno! Nessuna operazione pianificata per questa data.');
+ setTimeout(()=>{sysDate=null;const c=document.querySelector('#clock span');if(c)c.textContent='23/12/1999';const st=document.querySelector('#clock strong');if(st)st.textContent='21:00';astroSay('Data di sistema ripristinata: 23/12/1999 (sincronizzazione NOVANET).')},25000)}
+document.getElementById('clock')?.addEventListener('dblclick',dateDialog);
+
 // ---------- Inneschi: succedono a ogni passaggio, legati all'indagine (mai al tempo)
 let lastDepth=depth();
 setInterval(()=>{if(!document.getElementById('desktop')?.classList.contains('ready'))return;
  if(woke()&&!S.astroGreeted){S.astroGreeted=true;save();glitchAstro();window.novaSound?.('ding');astroSay('Bentornato, GMILANO_70.');setTimeout(()=>astroSay('...Assistenza NOVA 2000 attiva. Seleziona una funzione.'),4500)}
  const d=depth();if(d!==lastDepth){if(d===4&&!S.mazeAnnounced){S.mazeAnnounced=true;save();setTimeout(()=>{glitchAstro();window.novaSound?.('ding');astroSay('Nuovo record registrato in Signal Maze: GM_70, 15.200 punti. Data: oggi.')},3000)}lastDepth=d}
- forumPages();banners();
+ forumPages();banners();clockOverride();
+ // Cap. 7: dopo la direttiva, Pixel Runner si apre da solo sull'ultima partita.
+ if(d===7&&!S.runnerOpen&&!document.querySelector('.nova-shutdown')){S.runnerOpen=true;save();setTimeout(()=>{openApp('runner');almaVoice('Quella sera non abbiamo finito la partita.')},5000)}
  // Cap. 5: finita la finestra di ALMA, il modem chiama da solo NOVANET. Poi compare il messaggio sul forum.
  if(d===5&&!S.forumLive&&!S.dialing&&!document.querySelector('.nova-shutdown')){S.dialing=true;(async()=>{await sleep(2500);if(!window.novaOnline){astroSay('Connessione a NOVANET in corso...');await window.P99Dial?.auto();astroSay('Connesso a NOVANET. Nessuno ha premuto «Connetti».')}S.forumLive=true;S.dialing=false;save();forumPages()})()}
  // Cap. 6: la stanza di Giuseppe come sfondo, l'orologio fermo alle 21:30, ALMA si disegna da sola.
@@ -134,5 +171,5 @@ setInterval(()=>{if(!document.getElementById('desktop')?.classList.contains('rea
 },1500);
 forumPages();banners();
 
-window.P99Act2={check,explain,mazeGhostRow,astroProps,astroFind,forumLive,mount,compare};
+window.P99Act2={check,explain,mazeGhostRow,astroProps,astroFind,forumLive,mount,compare,runnerFeed,docText};
 })();

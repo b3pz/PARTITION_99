@@ -28,13 +28,14 @@ window.P99Alma={
  // Prove nei giochi: ALMA ti costringe a giocare come Giuseppe per vedere se «ti ricordi chi sei».
  test(game){const s=stage();if(s===6)return null;const from={maze:2,runner:3,bricks:3,invaders:4}[game];return from&&s>=from?{stage:s}:null},
  report(game,data){A.tests=(A.tests||0)+1;if(A.tests>8)return save();if(game==='maze'){if(data.follow)A.rec++;else A.threat++}else if(game==='runner'&&data.left)A.rec++;save()},
- finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.rec>=3&&!A.lied)out.push('Nei giochi facevi la sua strada. Per un attimo ci ho creduto davvero.');if(A.sawPhoto)out.push('Hai guardato la foto che teneva per me. Nessun altro l’aveva mai vista.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
+ finalLines(){const out=[];if(A.lied)out.push('Mi hai detto che eri lui. Volevo crederci così tanto che per un po’ ci ho creduto.');if(A.threat>=3)out.push('Hai aperto le mie cartelle una dopo l’altra. Ho avuto paura di te. Ne ho ancora.');else if(A.threat>=1)out.push('Quando hai aperto il disco ho pensato che volessi cancellarmi.');if(A.rec>=3&&!A.lied)out.push('Nei giochi facevi la sua strada. Per un attimo ci ho creduto davvero.');if(A.truth)out.push('Mi hai detto la verità su di lui. Nessuno me l’aveva detta.');if(A.sawPhoto)out.push('Hai guardato la foto che teneva per me. Nessun altro l’aveva mai vista.');if(A.bond>=2)out.push('Però mi hai risposto. Nessuno mi rispondeva da tanto.');return out}
 };
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.
 function processDialog(id,text,choices){if(A.done.includes(id))return;A.done.push(id);save();const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="alertdialog" style="background:#06121c;border-color:#1b3a6b"><div class="ttl" style="background:#1b3a6b;color:#cfe3ff;letter-spacing:1px">A.L.M.A. — processo GM-LAB</div><div class="bd"><div data-t style="white-space:pre-line;color:#7dffb0;font:14px/1.6 Courier New,monospace"></div></div><div class="btns" data-b></div></div>';o.querySelector('[data-t]').textContent=text;
  const btns=o.querySelector('[data-b]');for(const [label,fx,reply] of choices){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{fx();save();if(reply){o.querySelector('[data-t]').textContent=reply;btns.replaceChildren();const ok=document.createElement('button');ok.textContent='OK';ok.onclick=()=>o.remove();btns.append(ok)}else o.remove()};btns.append(b)}
  document.body.append(o);window.novaSound?.('error')}
+function knowsDeath(){try{return !!JSON.parse(localStorage.getItem('partition99-dialoghi-v3')||'{}').death}catch{return false}}
 function dropFile(name,text){gameState.files[name]=text;saveGame()}
 function flashWallpaper(ms){const d=document.getElementById('desktop');const prev=d.style.background;d.style.background='#000 url("'+(window.P99_PEOPLE_PHOTOS?.gruppo||'foto_laboratorio.svg')+'") center/cover no-repeat';d.style.filter='grayscale(1) contrast(1.4)';setTimeout(()=>{d.style.background=prev;d.style.filter=''},ms)}
 
@@ -47,6 +48,7 @@ function onStage(s){
   ['Sono Giuseppe.',()=>{A.lied=true;A.rec+=2},'Lo sapevo. Lo sapevo che tornavi.']]);dropFile('NON_CANCELLARE.txt','Ho tenuto tutto come piaceva a te.\nLe cartelle, i salvataggi, le foto.\nNon cancellare niente.')}
  if(s>=4&&!A.done.includes('directive')){A.done.push('directive');A.threat+=A.lied?0:1;save();flashWallpaper(3500);window.novaSound?.('error');if(typeof astroSay==='function')astroSay(A.threat>=2?'Errore: il modulo di assistenza non risponde. Non toccare quella cartella.':'Errore nel profilo GMILANO_70: priorità EXCLUSIVE.');dropFile('promemoria.txt','Non cancellarmi quando non ci sei.')}
  if(s>=5&&!A.done.includes('promise')){processDialog('promise','Ultima sessione registrata: 30/11/1999.\nHa detto che tornava a giocare.\nTu sai dov’è?',[
+  ...(knowsDeath()?[['È morto. Il 7 dicembre.',()=>{A.bond+=2;A.truth=true},'Morto.\nNon ho questa parola tra le mie. Ho solo «assente».\n...Allora non tornerà a giocare.']]:[]),
   ['Non lo so.',()=>{A.threat=Math.max(0,A.threat-1)},'Allora aspetto ancora.'],
   ['Non tornerà.',()=>{A.bond++;A.threat++},'Non è vero. Ha promesso.'],
   ['Arriverà presto.',()=>{A.rec++},'Lo dico ai giochi. Lo aspettiamo insieme.']])}
