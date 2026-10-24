@@ -45,9 +45,11 @@ let startAt=Number(sessionStorage.getItem(NOVA_EPOCH_KEY));if(!startAt||startAt>
 function tick(){const elapsed=Math.max(0,Date.now()-startAt);const date=new Date(Date.UTC(1999,11,23,21,0,0)+elapsed);const pad=n=>String(n).padStart(2,'0');const time=pad(date.getUTCHours())+':'+pad(date.getUTCMinutes());clock.innerHTML='<span>'+pad(date.getUTCDate())+'/'+pad(date.getUTCMonth()+1)+'/'+date.getUTCFullYear()+'</span><strong>'+time+'</strong>';clock.title='Ora simulata NOVA 2000, avanza dal 23/12/1999 alle 21:00'}
 tick();setInterval(tick,10000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
+window.P99SetWallpaper=setWallpaper;window.P99GetWallpaper=()=>wallpaper;
 function applyWallpaper(){
 desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';
-if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
+if(wallpaper.kind==='teal'){desk.style.background='#008080'}
+else if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
 else if(wallpaper.kind==='sky'){desk.style.background="#536e66 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).balze||"assets/balze_1998.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='night'){desk.style.background="#6d7d82 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).neve||"assets/neve_figline.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='image'){desk.style.background='#223 url("'+wallpaper.src+'") center center / cover no-repeat'}

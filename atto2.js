@@ -176,5 +176,5 @@ setInterval(()=>{if(!document.getElementById('desktop')?.classList.contains('rea
 },1500);
 forumPages();banners();
 
-window.P99Act2={check,explain,mazeGhostRow,astroProps,astroFind,forumLive,mount,compare,runnerFeed,docText,runnerStartLevel,short};
+window.P99Act2={check,explain,mazeGhostRow,astroProps,astroFind,forumLive,mount,compare,runnerFeed,docText,runnerStartLevel,short,dateDialog};
 })();
