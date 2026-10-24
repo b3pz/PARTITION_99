@@ -28,7 +28,7 @@ const css=document.createElement('style');css.textContent=`
 .p99-toast{position:fixed;left:14px;bottom:49px;z-index:12000;max-width:380px;background:#06121c;color:#7dffb0;border:2px solid #1b3a6b;padding:9px 12px;font:13px/1.45 "Courier New",monospace;box-shadow:2px 3px 0 #000}
 `;document.head.append(css);
 function toast(lines){const t=document.createElement('div');t.className='p99-toast';t.innerHTML=lines.map(l=>'<div></div>').join('');[...t.children].forEach((d,i)=>d.textContent=lines[i]);document.body.append(t);setTimeout(()=>t.remove(),7000)}
-function almaVoice(t){glitchAstro();setTimeout(()=>{window.P99Astro?.mood('alma',9000);astroSay(t)},900)}
+function almaVoice(t){glitchAstro();setTimeout(()=>{window.P99Astro?.mood('alma',9000+t.length*45);astroSay('');const tx=document.querySelector('#astro-widget .astrotxt');if(window.P99Type&&tx)window.P99Type(tx,t);else astroSay(t)},900)}
 function glitchAstro(){window.P99Astro?.mood('glitch',1500);const w=document.getElementById('astro-widget');if(!w)return;w.style.display='';w.classList.remove('glitch');void w.offsetWidth;w.classList.add('glitch');setTimeout(()=>w.classList.remove('glitch'),1600)}
 
 // Frammento ricomposto da NovaRescue: il registro avanza senza domande.
