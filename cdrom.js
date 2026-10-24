@@ -10,7 +10,7 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(C))}catch{}};
 const stage=()=>window.P99Alma?.stage?.()||0;
 const ending=()=>{try{return JSON.parse(localStorage.getItem('partition99-completa-v1')||'{}').ending||null}catch{return null}};
 const mounted=()=>!!window.P99Volume?.mounted?.();
-const almaSays=line=>{window.P99Astro?.mood('alma',9000+line.length*45);if(typeof astroSay==='function')astroSay('');const tx=document.querySelector('#astro-widget .astrotxt');if(window.P99Type&&tx)window.P99Type(tx,line);else astroSay?.(line)};
+const almaSays=line=>{window.P99AlmaSay?window.P99AlmaSay(line):astroSay?.(line)};
 const css=document.createElement('style');css.textContent=`
 .cd-run{height:100%;display:flex;flex-direction:column;background:#000a2a;color:#fff;font:13px Arial}
 .cd-head{background:linear-gradient(90deg,#c00000,#ff8000 55%,#ffd000);padding:10px 14px;color:#fff;text-shadow:2px 2px 0 #000}.cd-head b{font:bold 26px Impact,"Arial Black",sans-serif;letter-spacing:1px}.cd-head small{display:block;font:bold 12px Arial}
