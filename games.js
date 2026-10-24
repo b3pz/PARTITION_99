@@ -118,7 +118,7 @@ launchRunner=function(){
  function startLevel(){mode='ready';timer=100;msg=emit('runner','levelstart',{level:level+1,score})||'';say('click');
   // Prova di ALMA: il terminale si apre solo se passi prima da sinistra, come faceva Giuseppe (preferred_route=LEFT).
   ghostTest=!!almaTest('runner',level+1);ghostGot=false;if(ghostTest){tiles[0]=tiles[0]||Array(13).fill(' ');tiles[0][9]='g'}}
- function reset(){level=0;lives=3;score=0;signals=0;load(0)}
+ function reset(){level=window.P99Act2?.runnerStartLevel?.()||0;lives=3;score=0;signals=0;load(level)}
  reset();
  function collide(o,w,h){o.ground=false;o.x+=o.vx;let l=Math.floor(o.x/TS),r=Math.floor((o.x+w-1)/TS),t=Math.floor(o.y/TS),b=Math.floor((o.y+h-1)/TS);for(let ty=t;ty<=b;ty++){if(o.vx>0&&solid(r,ty)){o.x=r*TS-w;o.vx=0;o.hitWall=true}else if(o.vx<0&&solid(l,ty)){o.x=(l+1)*TS;o.vx=0;o.hitWall=true}}
   o.y+=o.vy;l=Math.floor(o.x/TS);r=Math.floor((o.x+w-1)/TS);t=Math.floor(o.y/TS);b=Math.floor((o.y+h-1)/TS);for(let tx=l;tx<=r;tx++){if(o.vy>0&&solid(tx,b)){o.y=b*TS-h;o.vy=0;o.ground=true}else if(o.vy<0&&solid(tx,t)){o.y=(t+1)*TS;o.vy=0}}}
