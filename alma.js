@@ -33,10 +33,10 @@ window.P99Alma={
 
 // ALMA scrive con calma, una lettera alla volta: pause sulla punteggiatura, cursore, clic per completare subito.
 const tcss=document.createElement('style');tcss.textContent='.p99-cur{display:inline-block;width:.6em;animation:blink .65s steps(1) infinite}';document.head.append(tcss);
-function type(el,text,{speed=34,append=false}={}){return new Promise(res=>{const node=document.createTextNode('');const cur=document.createElement('span');cur.className='p99-cur';cur.textContent='▌';if(!append)el.textContent='';el.append(node,cur);let i=0,done=false;
+function type(el,text,{speed=34,append=false}={}){return new Promise(res=>{if(el.closest('[data-fast]')){if(!append)el.textContent='';el.append(text);res();return}const node=document.createTextNode('');const cur=document.createElement('span');cur.className='p99-cur';cur.textContent='▌';if(!append)el.textContent='';el.append(node,cur);let i=0,done=false;
  const finish=()=>{if(done)return;done=true;node.textContent=text;cur.remove();el.removeEventListener('click',finish);el.closest('.dlg,.alma-term,.p99-pop')?.removeEventListener('click',finish);res()};
  (el.closest('.dlg,.alma-term,.p99-pop')||el).addEventListener('click',finish);
- const step=()=>{if(done)return;if(i>=text.length){finish();return}const ch=text[i++];node.textContent+=ch;if(i%2===0&&ch!==' ')window.novaSound?.('type');setTimeout(step,ch==='\n'?520:/[.?!…]/.test(ch)?380:/[,;:]/.test(ch)?170:speed+Math.random()*22)};step()})}
+ const step=()=>{if(done)return;if(el.closest('[data-fast]')){finish();return}if(i>=text.length){finish();return}const ch=text[i++];node.textContent+=ch;if(i%2===0&&ch!==' ')window.novaSound?.('type');setTimeout(step,ch==='\n'?520:/[.?!…]/.test(ch)?380:/[,;:]/.test(ch)?170:speed+Math.random()*22)};step()})}
 window.P99Type=type;
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.

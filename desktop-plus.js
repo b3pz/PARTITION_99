@@ -52,6 +52,7 @@ if(wallpaper.kind==='teal'){desk.style.background='#008080'}
 else if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
 else if(wallpaper.kind==='sky'){desk.style.background="#536e66 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).balze||"assets/balze_1998.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='night'){desk.style.background="#6d7d82 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).neve||"assets/neve_figline.svg")+") center center / cover no-repeat"}
+else if(wallpaper.kind==='tile'){desk.style.background='url("'+wallpaper.src+'") repeat'}
 else if(wallpaper.kind==='image'){desk.style.background='#223 url("'+wallpaper.src+'") center center / cover no-repeat'}
 else if(wallpaper.kind==='drawing'&&drawing){desk.style.background='#223 url("'+drawing+'") center center / contain no-repeat'}
 }
