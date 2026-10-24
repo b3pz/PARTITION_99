@@ -56,7 +56,7 @@ window.P99Volume={
  mounted,
  root:()=>[['Agenda 1999','Agenda',null],['Posta di GMILANO_70','Posta',null],['IDEE.TXT','Documento',IDEE],['promemoria_dicembre.txt','Documento',NOTA_DIC]],
  drafts:()=>Object.entries(DRAFTS).map(([n,c])=>[n,'Documento',c]),
- open(name){if(name==='Agenda 1999'){agenda();return true}if(name==='Posta di GMILANO_70'){openApp('mail');return true}return false}};
+ open(name){if(name==='Agenda 1999'){agenda();return true}if(name==='Posta di GMILANO_70'){openApp('mail');return true}if(name==='IDEE.TXT'){const el=panel('<div style="height:100%;overflow:auto;background:#fff"><img src="img/scrivania_notte.jpg" alt="La scrivania di Giuseppe di notte" style="display:block;width:100%"><pre style="white-space:pre-wrap;font:13px/1.5 Courier New,monospace;padding:10px 14px;margin:0;color:#111"></pre></div>');el.querySelector('pre').textContent=IDEE;createWindow('idee','IDEE.TXT — G:\\',el,{width:620,height:560});return true}return false}};
 window.P99Life={drafts:DRAFTS,markRead(n){if(DRAFTS[n]){V.read=V.read||{};V.read[n]=1;save()}}};
 const baseComputer=launchComputer;launchComputer=function(){baseComputer();if(!mounted())return;const w=[...document.querySelectorAll('.window')].pop();const grid=w?.querySelector('.files-grid');if(!grid)return;const it=document.createElement('div');it.className='file-item';it.innerHTML='🗄️<br>NV-RES-03 (G:)';it.onclick=()=>window.P99Explorer?.('NV-RES-03 (G:)');grid.append(it)};
 // Le bozze lette (Matteo ne parla) e il primo avviso del volume montato.
