@@ -54,9 +54,10 @@ function agenda(){let m=V.agMonth||0;const el=panel('<div class="ag"><div class=
 // ---------- Unità G: in Esplora risorse e in Risorse del computer
 window.P99Volume={
  mounted,
- root:()=>[['Agenda 1999','Agenda',null],['Posta — bozze non inviate','Cartella',null],['IDEE.TXT','Documento',IDEE],['promemoria_dicembre.txt','Documento',NOTA_DIC]],
+ root:()=>[['Agenda 1999','Agenda',null],['Posta di GMILANO_70','Posta',null],['IDEE.TXT','Documento',IDEE],['promemoria_dicembre.txt','Documento',NOTA_DIC]],
  drafts:()=>Object.entries(DRAFTS).map(([n,c])=>[n,'Documento',c]),
- open(name){if(name==='Agenda 1999'){agenda();return true}return false}};
+ open(name){if(name==='Agenda 1999'){agenda();return true}if(name==='Posta di GMILANO_70'){openApp('mail');return true}return false}};
+window.P99Life={drafts:DRAFTS,markRead(n){if(DRAFTS[n]){V.read=V.read||{};V.read[n]=1;save()}}};
 const baseComputer=launchComputer;launchComputer=function(){baseComputer();if(!mounted())return;const w=[...document.querySelectorAll('.window')].pop();const grid=w?.querySelector('.files-grid');if(!grid)return;const it=document.createElement('div');it.className='file-item';it.innerHTML='🗄️<br>NV-RES-03 (G:)';it.onclick=()=>window.P99Explorer?.('NV-RES-03 (G:)');grid.append(it)};
 // Le bozze lette (Matteo ne parla) e il primo avviso del volume montato.
 const baseText=launchText;launchText=function(name,text){if(DRAFTS[name]){V.read=V.read||{};V.read[name]=1;save()}return baseText.apply(this,arguments)};
