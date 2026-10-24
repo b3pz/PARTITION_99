@@ -45,9 +45,11 @@ let startAt=Number(sessionStorage.getItem(NOVA_EPOCH_KEY));if(!startAt||startAt>
 function tick(){const elapsed=Math.max(0,Date.now()-startAt);const date=new Date(Date.UTC(1999,11,23,21,0,0)+elapsed);const pad=n=>String(n).padStart(2,'0');const time=pad(date.getUTCHours())+':'+pad(date.getUTCMinutes());clock.innerHTML='<span>'+pad(date.getUTCDate())+'/'+pad(date.getUTCMonth()+1)+'/'+date.getUTCFullYear()+'</span><strong>'+time+'</strong>';clock.title='Ora simulata NOVA 2000, avanza dal 23/12/1999 alle 21:00'}
 tick();setInterval(tick,10000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
+window.P99SetWallpaper=setWallpaper;window.P99GetWallpaper=()=>wallpaper;
 function applyWallpaper(){
 desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';
-if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
+if(wallpaper.kind==='teal'){desk.style.background='#008080'}
+else if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
 else if(wallpaper.kind==='sky'){desk.style.background="#536e66 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).balze||"assets/balze_1998.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='night'){desk.style.background="#6d7d82 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).neve||"assets/neve_figline.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='image'){desk.style.background='#223 url("'+wallpaper.src+'") center center / cover no-repeat'}
@@ -69,7 +71,7 @@ function astroLocked(){try{const d=JSON.parse(localStorage.getItem('partition99-
 function astroContext(x,y){wmenu.replaceChildren();const title=document.createElement('div');title.className='nova-wall-title';title.textContent='Astro V';wmenu.append(title);function a(label,fn){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{hide();fn()};wmenu.append(b)}
 a('Parla con Astro V',()=>openApp('astro'));a('Proprietà',()=>window.P99Act2?window.P99Act2.astroProps():notify('Astro V'));
 if(astroLocked()){a('Riduci a icona (non disponibile)',()=>{if(typeof astroSay==='function')astroSay('Non posso ancora sparire. Non adesso.');notify('Il modulo di assistenza non risponde al comando.')})}
-else{a('Riduci a icona',()=>{const w=document.getElementById('astro-widget');w.style.display='none';notify('Astro V ridotto a icona. Apri Astro V dal desktop per ripristinarlo.')})}
+else{a('Riduci a icona',()=>{const w=document.getElementById('astro-widget');w.style.display='none';notify('Astro V ridotto a icona. Per ripristinarlo: START › Programmi › Astro V.')})}
 wmenu.hidden=false;wmenu.style.left=Math.max(2,Math.min(x,innerWidth-320))+'px';wmenu.style.top=Math.max(2,Math.min(y,innerHeight-wmenu.offsetHeight-6))+'px'}
 desk.addEventListener('contextmenu',e=>{if(e.target.closest('#astro-widget')){e.preventDefault();e.stopImmediatePropagation();astroContext(e.clientX,e.clientY)}},true);
 
