@@ -16,7 +16,7 @@ function setOnline(on){window.novaOnline=on;tray.hidden=!on;window.dispatchEvent
 
 function dialer(){
  if(window.novaOnline){const el=panel('<h2 class="program-title">📞 Connessione a NOVANET</h2><div class="nova-inset">Connesso a NOVANET a 56.000 bps.</div><p><button data-hang>Disconnetti</button></p>');el.querySelector('[data-hang]').onclick=()=>{setOnline(false);w.querySelector('[data-action="close"]').click()};const w=createWindow('dialup','Connessione a NOVANET',el,{width:420,height:240});return}
- const el=panel(`<h2 class="program-title">📞 Connessione a NOVANET</h2><div style="display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center"><label for="du-user">Nome utente:</label><input id="du-user" value="NOVA_USER"><label for="du-pass">Password:</label><input id="du-pass" type="password" value="nova1999"><label for="du-num">Numero di telefono:</label><input id="du-num" inputmode="tel" placeholder="es. 055 ..." autocomplete="off" value="${(()=>{try{return localStorage.getItem('nova2000-dialnum')||''}catch{return ''}})()}"></div><p class="note">Inserire il numero di accesso fornito dal provider.</p><p><button data-dial>Connetti</button> <button data-cancel>Annulla</button></p><div class="nova-inset" data-status style="min-height:64px;white-space:pre-line">Non connesso.</div>`);
+ const el=panel(`<h2 class="program-title">📞 Connessione a NOVANET</h2><div style="display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center"><label for="du-user">Nome utente:</label><input id="du-user" value="NOVA_USER"><label for="du-pass">Password:</label><input id="du-pass" type="password" value="nova1999"><label for="du-num">Numero di telefono:</label><input id="du-num" inputmode="tel" placeholder="es. 055 ..." autocomplete="off"></div><p class="note">Inserire il numero di accesso fornito dal provider.</p><p><button data-dial>Connetti</button> <button data-cancel>Annulla</button></p><div class="nova-inset" data-status style="min-height:64px;white-space:pre-line">Non connesso.</div>`);
  const w=createWindow('dialup','Connessione a NOVANET',el,{width:470,height:410});
  const num=el.querySelector('#du-num'),status=el.querySelector('[data-status]'),dial=el.querySelector('[data-dial]');let busy=false;
  el.querySelector('[data-cancel]').onclick=()=>{busy=false;w.querySelector('[data-action="close"]').click()};
@@ -30,7 +30,6 @@ function dialer(){
   window.novaSound?.('handshake');status.textContent='Negoziazione con il modem remoto...';await sleep(4600);
   status.textContent='Verifica di nome utente e password...';await sleep(2200);if(el.querySelector('#du-user').value.trim().toUpperCase()!=='NOVA_USER'||el.querySelector('#du-pass').value!=='nova1999'){window.novaSound?.('error');status.textContent='Nome utente o password non validi.\nIl server NOVANET ha chiuso la connessione.';busy=false;dial.disabled=false;return}
   status.textContent='Registrazione in rete...';await sleep(900);
-  try{localStorage.setItem('nova2000-dialnum',num.value.trim())}catch{}
   if(!w.isConnected)return;setOnline(true);window.novaSound?.('ding');status.textContent='Connesso a 56.000 bps.';notify('Connesso a NOVANET! Ora puoi navigare e usare NOVA Messenger.');
   await sleep(1300);if(w.isConnected)w.querySelector('[data-action="close"]').click()};
  num.focus();
