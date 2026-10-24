@@ -16,6 +16,7 @@ el.querySelector('[data-reset-all]').onclick=()=>{response.innerHTML='<p>Elimina
 
 // Note e crediti: le avvertenze sulle fonti stanno qui, non dentro le pagine del 1999.
 function creditsPanel(){const el=panel(`<h2>ℹ Note e crediti</h2>
+<p style="font-size:15px"><b>PARTITION_99</b> — un gioco di <b>b3pz</b>. Storia, mondo, foto e musica (AlpAcA) di b3pz.</p>
 <p><b>PARTITION_99</b> è un’opera di finzione. Giuseppe Milano, Matteo Niccheri, Edoardo Cattani, ALMA, Astro V, NOVA OS 2000, NOVANET, Goolarno, Valdarno Oggi e L’Eco della Vallata sono inventati.</p>
 <h3>Pagine e giornali</h3>
 <p>Articoli, ritagli, riviste, annunci, meteo, prezzi e orari ferroviari sono facsimili scritti per il gioco, non scansioni o trascrizioni di pubblicazioni del 1999. Luoghi, società sportive e locali reali del Valdarno sono citati come contesto; i dettagli degli articoli sono ricostruiti e le persone citate (baristi, dirigenti, abitanti) sono inventate.</p>

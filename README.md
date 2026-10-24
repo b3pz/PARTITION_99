@@ -2,6 +2,8 @@
 
 Gioco narrativo investigativo ambientato nel Valdarno alla fine del 1999.
 
+Un gioco di **b3pz**: storia, mondo, foto e musica (AlpAcA).
+
 **Gioca:** https://b3pz.github.io/PARTITION_99/
 
 ## Come giocare
