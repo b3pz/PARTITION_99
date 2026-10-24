@@ -38,6 +38,9 @@ function type(el,text,{speed=34,append=false}={}){return new Promise(res=>{if(el
  (el.closest('.dlg,.alma-term,.p99-pop')||el).addEventListener('click',finish);
  const step=()=>{if(done)return;if(el.closest('[data-fast]')){finish();return}if(i>=text.length){finish();return}const ch=text[i++];node.textContent+=ch;if(i%2===0&&ch!==' ')window.novaSound?.('type');setTimeout(step,ch==='\n'?520:/[.?!…]/.test(ch)?380:/[,;:]/.test(ch)?170:speed+Math.random()*22)};step()})}
 window.P99Type=type;
+const vcss=document.createElement('style');vcss.textContent='.p99-voice{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:19000;width:min(520px,90vw);background:#06121c;border:2px solid #1b3a6b;box-shadow:0 0 0 1px #000,4px 6px 0 #0008;color:#7dffb0;font:16px/1.6 "Courier New",monospace;opacity:0;transition:opacity .5s;pointer-events:none}.p99-voice.on{opacity:1}.p99-voice .ttl{background:#1b3a6b;color:#cfe3ff;font:bold 12px Arial;letter-spacing:1px;padding:4px 8px}.p99-voice .t{padding:12px 16px;min-height:28px;white-space:pre-line}';document.head.append(vcss);
+let voiceQ=Promise.resolve();
+window.P99AlmaSay=text=>{voiceQ=voiceQ.then(async()=>{window.P99Astro?.mood('alma',4000+text.length*60);const o=document.createElement('div');o.className='p99-voice';o.innerHTML='<div class="ttl">A.L.M.A.</div><div class="t"></div>';document.body.append(o);requestAnimationFrame(()=>o.classList.add('on'));window.novaSound?.('error');await sleep(350);await type(o.querySelector('.t'),text);await sleep(Math.max(2600,text.length*55));o.classList.remove('on');await sleep(550);o.remove()});return voiceQ};
 
 // Dialogo del processo GM-LAB: le risposte cambiano le variabili e quindi i toni successivi e il finale.
 async function processDialog(id,text,choices){if(A.done.includes(id))return;A.done.push(id);save();const o=document.createElement('div');o.className='nova-shutdown';o.innerHTML='<div class="dlg" role="alertdialog" style="background:#06121c;border-color:#1b3a6b"><div class="ttl" style="background:#1b3a6b;color:#cfe3ff;letter-spacing:1px">A.L.M.A. — processo GM-LAB</div><div class="bd"><div data-t style="white-space:pre-line;color:#7dffb0;font:14px/1.6 Courier New,monospace"></div></div><div class="btns" data-b></div></div>';const tx=o.querySelector('[data-t]'),btns=o.querySelector('[data-b]');document.body.append(o);window.novaSound?.('error');await sleep(500);await type(tx,text);
@@ -60,7 +63,7 @@ function onStage(s){
   ['Non tornerà.',()=>{A.bond++;A.threat++},'Non è vero. Ha promesso.'],
   ['Arriverà presto.',()=>{A.rec++},'Lo dico ai giochi. Lo aspettiamo insieme.']])}
  lastStage=s}
-setInterval(()=>{const s=stage();if(s!==lastStage&&s>lastStage&&s<6)onStage(s);else lastStage=s},1500);
+setInterval(()=>{if(document.querySelector('.nova-shutdown'))return;const s=stage();if(s!==lastStage&&s>lastStage&&s<6)onStage(s);else lastStage=s},1500);
 window.addEventListener('nova-story',e=>{if(e.detail?.type==='negative-developed'&&stage()>=1&&!A.done.includes('negative')){A.done.push('negative');A.sawPhoto=true;A.bond++;save();setTimeout(()=>{dropFile('fotogramma_14.txt','Quella non l’ha mai fatta stampare.\nLa teneva solo per me.');window.novaSound?.('msg')},1500)}});
 
 // Astro V: eco tecnica rara, solo dopo che il suo modulo è stato recuperato (fase 2+).

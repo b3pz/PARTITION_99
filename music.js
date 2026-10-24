@@ -60,7 +60,7 @@ function player(trackId){if(win&&win.isConnected){if(trackId)playId(trackId);win
  const data=new Uint8Array(32);(function draw(){if(!win.isConnected){audio.pause();audio.src='';ctx?.close?.();ctx=null;analyser=null;return}g.fillStyle='#000';g.fillRect(0,0,cv.width,cv.height);if(analyser&&!audio.paused){analyser.getByteFrequencyData(data)}else data.fill(0);const bw=cv.width/data.length;for(let i=0;i<data.length;i++){const h=data[i]/255*cv.height;g.fillStyle=i<data.length/3?'#5dff8a':i<data.length*2/3?'#ffe44d':'#ff6b4d';g.fillRect(i*bw+1,cv.height-h,bw-2,h)}requestAnimationFrame(draw)})();
  render();if(trackId)playId(trackId)}
 // La prima volta che si ascolta una canzone, ALMA riconosce la batteria (solo durante l'indagine).
-function almaNote(t){const s=window.P99Alma?.stage?.()||0;if(M.almaHeard||s<1||s>=6)return;M.almaHeard=true;save();setTimeout(()=>{window.P99Astro?.mood('alma',9000);if(typeof astroSay==='function')astroSay('');const tx=document.querySelector('#astro-widget .astrotxt');const line='La batteria è lui. Teneva il tempo anche sulla scrivania, quando pensava.';if(window.P99Type&&tx)window.P99Type(tx,line);else astroSay(line)},4000)}
+function almaNote(t){const s=window.P99Alma?.stage?.()||0;if(M.almaHeard||s<1||s>=6)return;M.almaHeard=true;save();setTimeout(()=>window.P99AlmaSay?.('La batteria è lui. Teneva il tempo anche sulla scrivania, quando pensava.'),4000)}
 window.P99Player=name=>{const t=TRACKS.find(x=>fname(x)===name||x.id===name);player(t?.id)};
 window.P99Music={downloads:()=>owned().map(t=>[fname(t),'Audio',t.mb+' MB'])};
 const prev=openApp;openApp=function(app){if(app==='player'){if(booting)return;player();document.getElementById('start-menu').hidden=true;return}return prev(app)};
