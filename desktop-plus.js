@@ -46,10 +46,12 @@ function tick(){const elapsed=Math.max(0,Date.now()-startAt);const date=new Date
 tick();setInterval(tick,10000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
 window.P99SetWallpaper=setWallpaper;window.P99GetWallpaper=()=>wallpaper;
-function applyWallpaper(){
+const skinTest=new Image();skinTest.onload=()=>{window.P99Skin=true;applyWallpaper()};skinTest.src='img/sfondo_nova2000.jpg';
+const skinCss=document.createElement('style');skinCss.textContent='#desktop.nova-skin:before{display:none}';document.head.append(skinCss);
+function applyWallpaper(){desk.classList.toggle('nova-skin',wallpaper.kind==='default'&&!!window.P99Skin);
 desk.style.backgroundImage='';desk.style.backgroundSize='';desk.style.backgroundPosition='';desk.style.backgroundColor='';
 if(wallpaper.kind==='teal'){desk.style.background='#008080'}
-else if(wallpaper.kind==='default'){desk.style.background='radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
+else if(wallpaper.kind==='default'){desk.style.background='url("img/sfondo_nova2000.jpg") center center / cover no-repeat, radial-gradient(ellipse at 58% 40%,#304364 0%,#25334d 43%,#19243a 100%)'}
 else if(wallpaper.kind==='sky'){desk.style.background="#536e66 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).balze||"assets/balze_1998.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='night'){desk.style.background="#6d7d82 url("+JSON.stringify((window.P99_REAL_PHOTOS||{}).neve||"assets/neve_figline.svg")+") center center / cover no-repeat"}
 else if(wallpaper.kind==='tile'){desk.style.background='url("'+wallpaper.src+'") repeat'}
