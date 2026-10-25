@@ -33,6 +33,20 @@ const GM={
  'Posta eliminata':[
   m('Matteo_N','GMILANO_70','01/04/1999','Pasquetta alle Balze?','Lunedì grigliata alle Balze, ci siamo tutti. Anche Leo scende da Bologna!\nVieni, dai. Ti passo a prendere alle 10.\n\nMatteo',true),
   m('NOVANET Offerte','GMILANO_70','10/09/1999','Modem 56K a prezzo speciale!','Approfitta dell’offerta autunno: modem 56K a sole 99.000 lire!',true)]};
+// Dopo il finale: Marco, il tecnico del biglietto, racconta com'è andata con la famiglia di Giuseppe.
+const reg=()=>{try{return JSON.parse(localStorage.getItem('partition99-completa-v1')||'{}')}catch{return {}}};
+const MK='nova2000-marco-mail';
+const MARCO={FORMAT:'Gli ho raccontato anche del programma, quello che parlava, e che l’hai cancellato. Ho avuto paura di come l’avrebbe presa.\nIl babbo invece ha annuito. Ha detto: «Giuseppe non voleva che nessuno stesse ad aspettare per lui». Credo che avesse ragione lui, e anche tu.',
+ ARCHIVE:'Gli ho raccontato anche del programma, quello che parlava, e che l’hai chiuso così com’era, senza toccare niente.\nLa mamma mi ha chiesto se un giorno si potrà riaprire. Le ho detto di sì. Allora mi ha chiesto di tenerne una copia io, «per quando saremo pronti». È in negozio, in un cassetto, con il loro nome sopra.',
+ RELEASE:'Gli ho raccontato anche del programma, quello che parlava, e che l’hai lasciato acceso, libero di fare quello che vuole.\nIl babbo è stato zitto un bel po’. Poi mi ha chiesto se gli si può scrivere. Gli ho detto che non lo so. Ha detto che magari a gennaio ci prova: «Così gli racconto della neve».'};
+let marcoMsg=null;
+function marco(){const e=reg().ending;if(!e||!MARCO[e]||localStorage.getItem(MK)!==e)return null;if(marcoMsg?.e===e)return marcoMsg;
+ const body='Ciao!\nHo ricevuto quello che hai recuperato dal disco di Giuseppe. Stamattina sono passato da Reggello e l’ho portato al babbo: tre dischetti e un CD. Le foto della band, quelle del laboratorio, i suoi programmi, le canzoni degli AlpAcA.\nNon ha detto niente per un pezzo. Poi ha detto solo: «Era tutto lì». La mamma ha voluto sentire una canzone subito, in cucina, con il volume alto.\n\n'+MARCO[e]+(reg().y2k?'\n\nPS: gli ho letto anche il messaggio per il 2000. Il babbo ha sorriso: dice che Giuseppe quella cosa del nuovo millennio la ripeteva a cena da quando aveva vent’anni.':'')+'\n\nGrazie. Davvero. Se ti serve qualcosa per il computer, sai dove trovarmi.\nBuon anno, e buon 2000.\n\nMarco — Laboratorio PC, San Giovanni Valdarno';
+ marcoMsg=Object.assign(m('Marco — Laboratorio PC','NOVA_USER','24/12/1999','Le cose di Giuseppe',body,true),{e});return marcoMsg}
+let endSeen=0;const marcoPending=()=>{const e=reg().ending;return !!e&&!!MARCO[e]&&localStorage.getItem(MK)!==e};
+function deliverMarco(popup){try{localStorage.setItem(MK,reg().ending)}catch{}window.novaSound?.('msg');window.dispatchEvent(new Event('nova-mail'));if(!popup)return;
+ const t=document.createElement('div');t.style.cssText='position:fixed;right:12px;bottom:48px;z-index:9000;width:290px;background:#e4ebf7;color:#152a4a;border:2px outset #fff;box-shadow:2px 3px #1116;font:14px Arial;cursor:pointer;animation:p99ping 1s ease-out 3';t.innerHTML='<div style="background:linear-gradient(90deg,#153d7f,#6fa0e1);color:#fff;padding:5px 8px;font-weight:bold">NovaMail</div><div style="padding:10px">Nuovo messaggio da <b>Marco — Laboratorio PC</b>: «Le cose di Giuseppe»</div>';t.onclick=()=>{t.remove();mail('user')};document.body.append(t);setTimeout(()=>t.remove(),60000)}
+setInterval(()=>{if(!marcoPending()){endSeen=0;return}if(!endSeen)endSeen=Date.now();if(window.novaOnline&&Date.now()-endSeen>25000&&!document.querySelector('.nova-shutdown,.p99-voice'))deliverMarco(true)},3000);
 function drafts(){const d=window.P99Life?.drafts||{};return Object.entries(d).map(([n,c])=>{const h=k=>(c.match(new RegExp('^'+k+': (.*)$','m'))||[])[1]||'';const body=c.split('\n\n').slice(1).join('\n\n');return Object.assign(m('GMILANO_70',h('A'),h('Data').split(' ')[0],h('Oggetto'),body,false),{draft:n})})}
 const css=document.createElement('style');css.textContent=`.nm{height:100%;display:flex;flex-direction:column;background:#c0c0c0;color:#111;font:12px Arial}
 .nm-bar{display:flex;gap:4px;padding:5px;border-bottom:1px solid #808080}.nm-bar button{min-width:64px;padding:3px 6px;font-size:12px}
@@ -45,8 +59,9 @@ const css=document.createElement('style');css.textContent=`.nm{height:100%;displ
 @media(max-width:620px){.nm-main{grid-template-columns:1fr}.nm-tree{max-height:110px}}`;document.head.append(css);
 function mail(start){const el=panel('<div class="nm"><div class="nm-bar"><button data-new>📧 Nuovo</button><button data-reply>Rispondi</button><button data-send>🔄 Invia/Ricevi</button></div><div class="nm-main"><div class="nm-tree"></div><div class="nm-right"><div class="nm-list"></div><div class="nm-prev">Seleziona un messaggio.</div></div></div><div class="nm-stat"></div></div>');
  const tree=el.querySelector('.nm-tree'),list=el.querySelector('.nm-list'),prev=el.querySelector('.nm-prev'),stat=el.querySelector('.nm-stat');let acc=start==='gm'&&mounted()?'gm':'user',folder='Posta in arrivo',sel=null;
- const box=()=>{const b=acc==='gm'?GM:USER;return folder==='Bozze'?drafts():(b[folder]||[])};
- function drawTree(){tree.replaceChildren();const add=(a,label,folders)=>{const h=document.createElement('div');h.className='acc';h.textContent=label;tree.append(h);folders.forEach(f=>{const d=document.createElement('div');const n=(f==='Bozze'?drafts():((a==='gm'?GM:USER)[f]||[])).filter(x=>x.unread).length;d.textContent=(f==='Posta in arrivo'?'📥 ':f==='Bozze'?'📄 ':f==='Posta eliminata'?'🗑️ ':'📧 ')+f+(n?' ('+n+')':'');d.className=acc===a&&folder===f?'on':'';d.onclick=()=>{acc=a;folder=f;sel=null;draw()};tree.append(d)})};
+ const box=()=>{const b=acc==='gm'?GM:USER;if(folder==='Bozze')return drafts();const l=b[folder]||[];const mm=acc==='user'&&folder==='Posta in arrivo'&&marco();return mm?[mm,...l]:l};
+ addEventListener('nova-mail',()=>{if(el.isConnected)draw()});
+ function drawTree(){tree.replaceChildren();const add=(a,label,folders)=>{const h=document.createElement('div');h.className='acc';h.textContent=label;tree.append(h);folders.forEach(f=>{const d=document.createElement('div');const n=(f==='Bozze'?drafts():((a==='gm'?GM:USER)[f]||[]).concat(a==='user'&&f==='Posta in arrivo'&&marco()||[])).filter(x=>x.unread).length;d.textContent=(f==='Posta in arrivo'?'📥 ':f==='Bozze'?'📄 ':f==='Posta eliminata'?'🗑️ ':'📧 ')+f+(n?' ('+n+')':'');d.className=acc===a&&folder===f?'on':'';d.onclick=()=>{acc=a;folder=f;sel=null;draw()};tree.append(d)})};
   add('user','NOVA_USER (questo computer)',['Posta in arrivo']);
   if(mounted())add('gm','GMILANO_70 — G:\\POSTA (sola lettura)',['Posta in arrivo','Posta inviata','Bozze','Posta eliminata']);
   else{const d=document.createElement('div');d.style.cssText='color:#777;margin-top:10px;white-space:normal;cursor:default';d.textContent='Nessun’altra cartella di posta trovata sui dischi collegati.';tree.append(d)}}
@@ -56,7 +71,7 @@ function mail(start){const el=panel('<div class="nm"><div class="nm-bar"><button
  function draw(){drawTree();drawList();drawPrev()}
  el.querySelector('[data-new]').onclick=()=>{prev.textContent=acc==='gm'?'La casella di GMILANO_70 è in sola lettura.':'Per scrivere a qualcuno serve il suo indirizzo. Per ora puoi usare NOVA Messenger.'};
  el.querySelector('[data-reply]').onclick=()=>{prev.textContent=acc==='gm'?'La casella di GMILANO_70 è in sola lettura: non è possibile rispondere.':'Seleziona un messaggio a cui rispondere.'};
- el.querySelector('[data-send]').onclick=()=>{if(!window.novaOnline){stat.textContent='Non connesso: collegati a NOVANET con «Connessione a Internet».';window.novaSound?.('error');return}window.novaSound?.('ding');stat.textContent='Invio e ricezione completati: nessun nuovo messaggio.'};
+ el.querySelector('[data-send]').onclick=()=>{if(!window.novaOnline){stat.textContent='Non connesso: collegati a NOVANET con «Connessione a Internet».';window.novaSound?.('error');return}if(marcoPending()){deliverMarco(false);acc='user';folder='Posta in arrivo';sel=null;draw();stat.textContent='Invio e ricezione completati: 1 nuovo messaggio.';return}window.novaSound?.('ding');stat.textContent='Invio e ricezione completati: nessun nuovo messaggio.'};
  draw();createWindow('novamail','NovaMail — '+(acc==='gm'?'GMILANO_70':'NOVA_USER'),el,{width:760,height:520})}
 
 // Cartella «Giochi» del desktop.
@@ -65,5 +80,5 @@ const gcss=document.createElement('style');gcss.textContent='.gf{display:flex;fl
 function games(){const el=panel('<div class="gf"></div>');const f=el.querySelector('.gf');GAMES.forEach(([app,ico,label])=>{const d=document.createElement('div');d.tabIndex=0;d.innerHTML='<span class="g"></span><span></span>';d.firstChild.textContent=ico;d.lastChild.textContent=label;d.ondblclick=()=>openApp(app);d.onkeydown=e=>{if(e.key==='Enter')openApp(app)};if(matchMedia('(hover:none)').matches)d.onclick=()=>openApp(app);f.append(d)});createWindow('giochi','Giochi',el,{width:470,height:260})}
 
 const prevOpen=openApp;openApp=function(app){if(app==='mail'){if(booting)return;mail(mounted()?'gm':'user');document.getElementById('start-menu').hidden=true;return}if(app==='games'){if(booting)return;games();document.getElementById('start-menu').hidden=true;return}return prevOpen(app)};
-window.P99Mail=mail;
+window.P99Mail=mail;window.P99MarcoPending=marcoPending;
 })();
