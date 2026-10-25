@@ -42,7 +42,8 @@ window.addEventListener('resize',applyPositions);
 applyPositions();
 const NOVA_EPOCH_KEY='nova2000-clock-start-v1';
 let startAt=Number(sessionStorage.getItem(NOVA_EPOCH_KEY));if(!startAt||startAt>Date.now()){startAt=Date.now();sessionStorage.setItem(NOVA_EPOCH_KEY,String(startAt))}
-function tick(){const elapsed=Math.max(0,Date.now()-startAt);const date=new Date(Date.UTC(1999,11,23,21,0,0)+elapsed);const pad=n=>String(n).padStart(2,'0');const time=pad(date.getUTCHours())+':'+pad(date.getUTCMinutes());clock.innerHTML='<span>'+pad(date.getUTCDate())+'/'+pad(date.getUTCMonth()+1)+'/'+date.getUTCFullYear()+'</span><strong>'+time+'</strong>';clock.title='Ora simulata NOVA 2000, avanza dal 23/12/1999 alle 21:00'}
+window.addEventListener('p99-clock',()=>tick());
+function tick(){if(window.P99ClockHold)return;const elapsed=Math.max(0,Date.now()-startAt);const date=new Date(Date.UTC(1999,11,23,21,0,0)+elapsed);const pad=n=>String(n).padStart(2,'0');const time=pad(date.getUTCHours())+':'+pad(date.getUTCMinutes());clock.innerHTML='<span>'+pad(date.getUTCDate())+'/'+pad(date.getUTCMonth()+1)+'/'+date.getUTCFullYear()+'</span><strong>'+time+'</strong>';clock.title='Ora simulata NOVA 2000, avanza dal 23/12/1999 alle 21:00'}
 tick();setInterval(tick,10000);
 function setWallpaper(w){wallpaper=w;set('wallpaper',w);applyWallpaper()}
 window.P99SetWallpaper=setWallpaper;window.P99GetWallpaper=()=>wallpaper;

@@ -23,7 +23,7 @@ Q8 — NV-RES-03 / CONTROLLO: ORIGINE.BAK si apre solo il 01/01/2000 → doppio 
 ALMA (alma.js) — fasi legate solo ai progressi: accoglienza dopo MONTANINO, dubbio dopo Q3, sospetto dopo Q4 (finestra GM-LAB «Perché?», NON_CANCELLARE.txt, modem automatico e post di GMILANO_70 sul forum segnalato da Matteo), paura dopo Q6 (sfondo, Astro, promemoria.txt, disturbi nei giochi), attesa dopo Q7 (finestra sulla promessa del 30/11). Frasi nelle schermate di Signal Maze e Pixel Runner cambiano con la fase. Le risposte alle finestre GM-LAB e l'aver detto «Sono Giuseppe» cambiano il monologo finale.
 Matteo scrive per primo appena sei in linea dopo aver recuperato l'account con NovaRescue.
 
-FINALI: dopo Q8 si apre il terminale di A.L.M.A. 1.9 (stessa grafica del prototipo nella foto del fotogramma 14). Il monologo cambia in base a come hai trattato ALMA. Ogni operazione è spiegata in parole semplici e chiede conferma:
+FINALI: dopo Q8 si apre il terminale di A.L.M.A. 1.0 (stessa grafica del prototipo nella foto del fotogramma 14). Il monologo cambia in base a come hai trattato ALMA. Ogni operazione è spiegata in parole semplici e chiede conferma:
 - FORMAT: cancella la partizione. Dopo il riavvio spariscono i file di ALMA e il negativo; Utility disco mostra 3 GB vuoti.
 - ARCHIVE: chiude la partizione in sola lettura. Dopo il riavvio compare NV-RES-03_archiviato.txt.
 - RELEASE: toglie la direttiva. Dopo il riavvio compare ciao.txt («Cosa facciamo oggi?») e i giochi salutano senza cercare Giuseppe.

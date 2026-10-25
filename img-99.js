@@ -13,7 +13,7 @@ let override=null,until=0,talkUntil=0;
 function base(){const s=window.P99Alma?.stage?.()||0;return s===4?'worried':'idle'}
 function update(){if(!img)return;const now=Date.now();const k=override&&now<until?override:now<talkUntil?'talk':base();if(img.dataset.mood!==k){img.dataset.mood=k;img.src=SP(k)}}
 window.P99Astro={mood(k,ms){override=k;until=Date.now()+ms;update()}};
-const widget=document.getElementById('astro-widget');let zT=0;const front=on=>{if(!widget)return;clearTimeout(zT);widget.style.zIndex=on?'5500':'15';if(on)zT=setTimeout(()=>front(false),12500)};front(false);widget?.addEventListener('pointerdown',()=>front(true));
+const widget=document.getElementById('astro-widget');let zT=0;const front=on=>{if(!widget)return;clearTimeout(zT);widget.style.zIndex=on?'5500':'15';if(on)zT=setTimeout(()=>front(false),6000)};front(false);widget?.addEventListener('pointerdown',()=>front(true));
 const prevSay=astroSay;astroSay=function(s,show=true){const r=prevSay.apply(this,arguments);if(show!==false)front(true);if(show!==false)talkUntil=Date.now()+2600;update();return r};
 update();setInterval(update,400);
 })();
