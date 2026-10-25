@@ -47,6 +47,7 @@ launchMaze=function(){
   const n=Math.min(4,2+l);for(let i=0;i<n;i++){const [hx,hy]=homes[i%homes.length];ghosts.push({x:hx,y:hy,px:hx,py:hy,dir:[0,-1],home:[hx,hy],kind:i%3,color:ghostColors[i],eaten:false,delay:60+i*90})}}
  function open(x,y){return y>=0&&y<ROWS&&x>=0&&x<COLS&&grid[y][x]!=='#'}
  function reset(full){if(full){level=0;lives=3;score=0}load(level);fright=0;want=null}
+ window.P99Skip=window.P99Skip||{};window.P99Skip.maze=()=>{if(mode!=='play'&&mode!=='ready'){reset(true);startLevel()}mode='clear';timer=40;score+=500*(level+1);msg=emit('maze','levelclear',{level:level+1,score})||'';say('tada')};
  function startLevel(){mode='ready';timer=110;msg=emit('maze','levelstart',{level:level+1,score})||'';say('click');route=null;rage=0;lastTile=player.x+','+player.y;
   // Prova di ALMA: la strada che faceva Giuseppe (nord, est, est) da seguire fino in fondo.
   if(almaTest('maze',level+1)){const pref=[DIRS.up,DIRS.right,DIRS.right];let x=player.x,y=player.y,prev=null,k=0;const path=[[x,y]];for(let i=0;i<60&&path.length<16;i++){const opts=[pref[k%3],DIRS.up,DIRS.right,DIRS.down,DIRS.left].filter(d=>open(x+d[0],y+d[1])&&!(prev&&d[0]===-prev[0]&&d[1]===-prev[1])&&!path.some(q=>q[0]===x+d[0]&&q[1]===y+d[1]));if(!opts.length)break;const d=opts[0];x+=d[0];y+=d[1];prev=d;path.push([x,y]);if(d===pref[k%3])k++}route={tiles:path.map(q=>q.join(',')),reached:0};live.t='Segui la sua strada.';live.n=320}}
@@ -119,6 +120,7 @@ launchRunner=function(){
   // Prova di ALMA: il terminale si apre solo se passi prima da sinistra, come faceva Giuseppe (preferred_route=LEFT).
   ghostTest=!!almaTest('runner',level+1);ghostGot=false;if(ghostTest){tiles[0]=tiles[0]||Array(13).fill(' ');tiles[0][9]='g'}}
  function reset(){level=window.P99Act2?.runnerStartLevel?.()||0;lives=3;score=0;signals=0;load(level)}
+ window.P99Skip=window.P99Skip||{};window.P99Skip.runner=()=>{if(mode!=='play'&&mode!=='ready'){reset();startLevel()}mode='clear';timer=40;score+=1000;msg=emit('runner','levelclear',{level:level+1,score,signals})||'';say('tada')};
  reset();
  function collide(o,w,h){o.ground=false;o.x+=o.vx;let l=Math.floor(o.x/TS),r=Math.floor((o.x+w-1)/TS),t=Math.floor(o.y/TS),b=Math.floor((o.y+h-1)/TS);for(let ty=t;ty<=b;ty++){if(o.vx>0&&solid(r,ty)){o.x=r*TS-w;o.vx=0;o.hitWall=true}else if(o.vx<0&&solid(l,ty)){o.x=(l+1)*TS;o.vx=0;o.hitWall=true}}
   o.y+=o.vy;l=Math.floor(o.x/TS);r=Math.floor((o.x+w-1)/TS);t=Math.floor(o.y/TS);b=Math.floor((o.y+h-1)/TS);for(let tx=l;tx<=r;tx++){if(o.vy>0&&solid(tx,b)){o.y=b*TS-h;o.vy=0;o.ground=true}else if(o.vy<0&&solid(tx,t)){o.y=(t+1)*TS;o.vy=0}}}

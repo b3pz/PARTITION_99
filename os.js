@@ -129,6 +129,10 @@ function saver(preview){if(on)return;const kind=O.saver==='nessuno'&&preview?'st
  if(preview)setTimeout(()=>{last=Date.now()},300)}
 setInterval(()=>{if(on||O.saver==='nessuno'||typeof booting!=='undefined'&&booting)return;if(!document.getElementById('desktop')?.classList.contains('ready'))return;if(Date.now()-last>O.wait*60000)saver(false)},2000);
 
+// Solo per i playtest automatici (?playtest=1 nell'indirizzo): «Salta livello» nei giochi che servono all'indagine.
+const PLAYTEST=(()=>{try{if(new URLSearchParams(location.search).has('playtest'))sessionStorage.setItem('p99-playtest','1');return sessionStorage.getItem('p99-playtest')==='1'}catch{return false}})();
+for(const [g,fn] of [['maze','launchMaze'],['runner','launchRunner']]){const base=window[fn];if(typeof base!=='function')continue;window[fn]=function(){const r=base.apply(this,arguments);if(PLAYTEST){const w=[...document.querySelectorAll('.window')].pop();const b=document.createElement('button');b.textContent='[PLAYTEST] Salta livello';b.style.cssText='margin:4px auto;display:block';const op=(n,t)=>{if(![...document.querySelectorAll('.window-title,.title-bar-text')].some(e=>e.textContent.includes(n)))launchText(n,t)};b.onclick=()=>{window.P99Skip?.[g]?.();if(g==='runner')setTimeout(()=>{const t=gameState.files['ULTIMA_SESSIONE.LOG'];if(t&&/23:12/.test(t))op('ULTIMA_SESSIONE.LOG',t)},4500);if(g==='maze')setTimeout(()=>{const t=gameState.files['SIGNAL_confronto.log'];if(t)op('SIGNAL_confronto.log',t)},4500)};(w?.querySelector('.window-content')||w)?.append(b)}return r}}
+
 // ---------- Avvio dei programmi
 const prevOpen=openApp;openApp=function(app){const m={trash:trashWin,notepad:()=>notepad(),calc,dos,scandisk,defrag,control};if(m[app]){if(booting)return;m[app]();document.getElementById('start-menu').hidden=true;return}return prevOpen(app)};
 window.P99Notepad=notepad;
